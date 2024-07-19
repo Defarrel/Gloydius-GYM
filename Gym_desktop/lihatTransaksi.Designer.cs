@@ -28,26 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.backBtn = new System.Windows.Forms.Button();
-            this.transaksiBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.gYMDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.gYMDataSet = new Gym_desktop.GYMDataSet();
             this.label1 = new System.Windows.Forms.Label();
-            this.transaksiTableAdapter = new Gym_desktop.GYMDataSetTableAdapters.TransaksiTableAdapter();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.idtransaksiDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tanggaltransaksiDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.totalDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.idmemberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.idpaketDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            ((System.ComponentModel.ISupportInitialize)(this.transaksiBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gYMDataSetBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gYMDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -65,21 +52,6 @@
             this.backBtn.UseVisualStyleBackColor = false;
             this.backBtn.Click += new System.EventHandler(this.backBtn_Click);
             // 
-            // transaksiBindingSource
-            // 
-            this.transaksiBindingSource.DataMember = "Transaksi";
-            this.transaksiBindingSource.DataSource = this.gYMDataSetBindingSource;
-            // 
-            // gYMDataSetBindingSource
-            // 
-            this.gYMDataSetBindingSource.DataSource = this.gYMDataSet;
-            this.gYMDataSetBindingSource.Position = 0;
-            // 
-            // gYMDataSet
-            // 
-            this.gYMDataSet.DataSetName = "GYMDataSet";
-            this.gYMDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -91,15 +63,10 @@
             this.label1.TabIndex = 18;
             this.label1.Text = "Menu Lihat Transaksi";
             // 
-            // transaksiTableAdapter
-            // 
-            this.transaksiTableAdapter.ClearBeforeFill = true;
-            // 
             // dataGridView1
             // 
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.AutoGenerateColumns = false;
             this.dataGridView1.BackgroundColor = System.Drawing.Color.DarkSlateGray;
             this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -111,13 +78,6 @@
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.idtransaksiDataGridViewTextBoxColumn,
-            this.tanggaltransaksiDataGridViewTextBoxColumn,
-            this.totalDataGridViewTextBoxColumn,
-            this.idmemberDataGridViewTextBoxColumn,
-            this.idpaketDataGridViewTextBoxColumn});
-            this.dataGridView1.DataSource = this.transaksiBindingSource;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -146,41 +106,6 @@
             this.dataGridView1.Size = new System.Drawing.Size(503, 296);
             this.dataGridView1.TabIndex = 19;
             // 
-            // idtransaksiDataGridViewTextBoxColumn
-            // 
-            this.idtransaksiDataGridViewTextBoxColumn.DataPropertyName = "Id_transaksi";
-            this.idtransaksiDataGridViewTextBoxColumn.HeaderText = "ID";
-            this.idtransaksiDataGridViewTextBoxColumn.Name = "idtransaksiDataGridViewTextBoxColumn";
-            this.idtransaksiDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // tanggaltransaksiDataGridViewTextBoxColumn
-            // 
-            this.tanggaltransaksiDataGridViewTextBoxColumn.DataPropertyName = "Tanggal_transaksi";
-            this.tanggaltransaksiDataGridViewTextBoxColumn.HeaderText = "Tanggal";
-            this.tanggaltransaksiDataGridViewTextBoxColumn.Name = "tanggaltransaksiDataGridViewTextBoxColumn";
-            this.tanggaltransaksiDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // totalDataGridViewTextBoxColumn
-            // 
-            this.totalDataGridViewTextBoxColumn.DataPropertyName = "Total";
-            this.totalDataGridViewTextBoxColumn.HeaderText = "Total";
-            this.totalDataGridViewTextBoxColumn.Name = "totalDataGridViewTextBoxColumn";
-            this.totalDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // idmemberDataGridViewTextBoxColumn
-            // 
-            this.idmemberDataGridViewTextBoxColumn.DataPropertyName = "Id_member";
-            this.idmemberDataGridViewTextBoxColumn.HeaderText = "Id Member";
-            this.idmemberDataGridViewTextBoxColumn.Name = "idmemberDataGridViewTextBoxColumn";
-            this.idmemberDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // idpaketDataGridViewTextBoxColumn
-            // 
-            this.idpaketDataGridViewTextBoxColumn.DataPropertyName = "Id_paket";
-            this.idpaketDataGridViewTextBoxColumn.HeaderText = "Id Paket";
-            this.idpaketDataGridViewTextBoxColumn.Name = "idpaketDataGridViewTextBoxColumn";
-            this.idpaketDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
             // lihatTransaksi
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -195,9 +120,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "lihatTransaksi";
             this.Load += new System.EventHandler(this.lihatTransaksi_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.transaksiBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gYMDataSetBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gYMDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -207,16 +129,7 @@
         #endregion
 
         private System.Windows.Forms.Button backBtn;
-        private System.Windows.Forms.BindingSource gYMDataSetBindingSource;
-        private GYMDataSet gYMDataSet;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.BindingSource transaksiBindingSource;
-        private GYMDataSetTableAdapters.TransaksiTableAdapter transaksiTableAdapter;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn idtransaksiDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn tanggaltransaksiDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn totalDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn idmemberDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn idpaketDataGridViewTextBoxColumn;
     }
 }

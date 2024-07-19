@@ -42,5 +42,12 @@ namespace Gym_desktop
             up.MdiParent = this.MdiParent;
             up.Show();
         }
+
+        private void diagram_Click(object sender, EventArgs e)
+        {
+            diagramPaket dp = new diagramPaket();
+            dp.MdiParent = this.MdiParent;
+            dp.Show();
+        }
     }
 }

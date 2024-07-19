@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Data;
+using System.Data.SqlClient;
 using System.Windows.Forms;
 
 namespace Gym_desktop
 {
     public partial class hapusPaket : Form
     {
-        DataRow dr;
+        string strKoneksi = "Data Source = DEFARREL; Initial Catalog = GYM;" +
+            "Integrated Security = True; MultipleActiveResultSets=true";
         public hapusPaket()
         {
             InitializeComponent();
@@ -33,27 +35,54 @@ namespace Gym_desktop
         {
             string code = hapus_text.Text;
 
-            dr = gYMDataSet1.Tables["PaketMember"].Rows.Find(code);
-
-            if (dr != null)
+            SqlConnection connection = new SqlConnection(strKoneksi);
             {
-                dr.Delete();
+                connection.Open();
 
-                paketMemberTableAdapter.Update(gYMDataSet1);
+                string query = "DELETE FROM PaketMember WHERE Id_paket = @Id";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@Id", code);
 
-                MessageBox.Show("Data berhasil dihapus!", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            else
-            {
-                MessageBox.Show("Data tidak ditemukan.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    int rowsAffected = command.ExecuteNonQuery();
+                    if (rowsAffected > 0)
+                    {
+                        MessageBox.Show("Data berhasil dihapus!", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Data tidak ditemukan.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
             }
         }
 
         private void hapusPaket_Load(object sender, EventArgs e)
         {
-            // TODO: This line of code loads data into the 'gYMDataSet1.PaketMember' table. You can move, or remove it, as needed.
-            this.paketMemberTableAdapter.Fill(this.gYMDataSet1.PaketMember);
+            LoadData();
+        }
 
+        public void LoadData()
+        {
+            DataTable dataTable = new DataTable();
+
+            SqlConnection connection = new SqlConnection(strKoneksi);
+            connection.Open();
+            string query = "SELECT * FROM PaketMember";
+            SqlCommand cmd = new SqlCommand(query, connection);
+            cmd.CommandType = CommandType.Text;
+            SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+            adapter.Fill(dataTable);
+
+
+            dataGridView1.DataSource = dataTable;
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            LoadData();
+            DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
+            hapus_text.Text = row.Cells["Id_paket"].Value.ToString();
         }
     }
 }

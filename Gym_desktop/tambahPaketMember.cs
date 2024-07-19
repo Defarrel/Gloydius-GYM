@@ -1,22 +1,17 @@
 ﻿using System;
-using System.Data;
-using System.Drawing;
-using System.Runtime.ConstrainedExecution;
+using System.Data.SqlClient;
 using System.Windows.Forms;
 
 namespace Gym_desktop
 {
     public partial class tambahPaketMember : Form
     {
-        DataTable dt;
-        DataRow dr;
-        String code;
+        string strKoneksi = "Data Source=DEFARREL;Initial Catalog=GYM;Integrated Security=True;MultipleActiveResultSets=true";
 
         public tambahPaketMember()
         {
             InitializeComponent();
         }
-
 
         private void btnTambah_Click(object sender, EventArgs e)
         {
@@ -35,21 +30,32 @@ namespace Gym_desktop
                 return;
             }
 
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(strKoneksi))
+                {
+                    connection.Open();
 
-            dt = gYMDataSet1.Tables["PaketMember"];
+                    string query = @"INSERT INTO PaketMember (Id_paket, Nama_paket, Harga_paket, Durasi_paket) 
+                                     VALUES (@Id_paket, @Nama_paket, @Harga_paket, @Durasi_paket)";
 
-            dr = dt.NewRow();
+                    SqlCommand command = new SqlCommand(query, connection);
+                    command.Parameters.AddWithValue("@Id_paket", id_paket.Text);
+                    command.Parameters.AddWithValue("@Nama_paket", nama_paket.Text);
+                    command.Parameters.AddWithValue("@Harga_paket", hargaValue);
+                    command.Parameters.AddWithValue("@Durasi_paket", durasi.Text);
 
-            dr["Id_paket"] = id_paket.Text;
-            dr["Nama_paket"] = nama_paket.Text;
-            dr["Harga_paket"] = decimal.Parse(harga_paket.Text);
-            dr["Durasi_paket"] = durasi.Text;
+                    command.ExecuteNonQuery();
 
-            dt.Rows.Add(dr);
+                    MessageBox.Show("Paket member berhasil ditambahkan!", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            paketMemberTableAdapter.Update(gYMDataSet1.PaketMember);
-
-            MessageBox.Show("Paket member berhasil ditambahkan!", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    id_paket.Enabled = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Terjadi kesalahan saat menyimpan data: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void backBtn_Click(object sender, EventArgs e)
@@ -59,35 +65,48 @@ namespace Gym_desktop
 
         private void tambahPaketMember_Load(object sender, EventArgs e)
         {
-            // TODO: This line of code loads data into the 'gYMDataSet1.PaketMember' table. You can move, or remove it, as needed.
-            this.paketMemberTableAdapter.Fill(this.gYMDataSet1.PaketMember);
+            GenerateNewId();
+        }
 
-            int ctr, len;
-            string codeval;
-
-            dt = gYMDataSet1.Tables["PaketMember"];
-            len = dt.Rows.Count - 1;
-            dr = dt.Rows[len];
-            code = dr["Id_paket"].ToString();
-            codeval = code.Substring(2, 3);
-            ctr = Convert.ToInt32(codeval);
-
-            if ((ctr >= 1) && (ctr < 9))
+        private void GenerateNewId()
+        {
+            try
             {
-                ctr = ctr + 1;
-                id_paket.Text = "PK00" + ctr;
+                using (SqlConnection connection = new SqlConnection(strKoneksi))
+                {
+                    string query = "SELECT TOP 1 Id_paket FROM PaketMember ORDER BY Id_paket DESC";
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        connection.Open();
+                        SqlDataReader reader = command.ExecuteReader();
+                        if (reader.Read())
+                        {
+                            string lastId = reader["Id_Paket"].ToString();
+                            int ctr = int.Parse(lastId.Substring(2, 3)) + 1;
+
+                            if (ctr <= 9)
+                            {
+                                id_paket.Text = "PK00" + ctr;
+                            }
+                            else if (ctr <= 99)
+                            {
+                                id_paket.Text = "PK0" + ctr;
+                            }
+                            else
+                            {
+                                id_paket.Text = "PK" + ctr;
+                            }
+                        }
+                        else
+                        {
+                            id_paket.Text = "PK001";
+                        }
+                    }
+                }
             }
-
-            else if ((ctr >= 9) && (ctr <= 99))
+            catch (Exception ex)
             {
-                ctr = ctr + 1;
-                id_paket.Text = "PK0" + ctr;
-            }
-
-            else if (ctr > 999)
-            {
-                ctr = ctr + 1;
-                id_paket.Text = "Mhs" + ctr;
+                MessageBox.Show("Terjadi kesalahan: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
             id_paket.Enabled = false;

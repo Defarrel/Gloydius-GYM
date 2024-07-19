@@ -69,6 +69,7 @@
             this.transaksi.TabIndex = 20;
             this.transaksi.Text = "Transaksi Management";
             this.transaksi.UseVisualStyleBackColor = true;
+            this.transaksi.Click += new System.EventHandler(this.transaksi_Click);
             // 
             // paket
             // 

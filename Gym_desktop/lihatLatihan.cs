@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,8 @@ namespace Gym_desktop
 {
     public partial class lihatLatihan : Form
     {
+        string strKoneksi = "Data Source = DEFARREL; Initial Catalog = GYM;" +
+"Integrated Security = True; MultipleActiveResultSets=true";
         public lihatLatihan()
         {
             InitializeComponent();
@@ -19,10 +22,18 @@ namespace Gym_desktop
 
         private void lihatLatihan_Load(object sender, EventArgs e)
         {
-            // TODO: This line of code loads data into the 'gYMDataSet2.Latihan' table. You can move, or remove it, as needed.
-            this.latihanTableAdapter.Fill(this.gYMDataSet2.Latihan);
-            // TODO: This line of code loads data into the 'gYMDataSet2.Riwayat_latihan' table. You can move, or remove it, as needed.
-            this.riwayat_latihanTableAdapter.Fill(this.gYMDataSet2.Riwayat_latihan);
+            DataTable dataTable = new DataTable();
+
+            SqlConnection connection = new SqlConnection(strKoneksi);
+            connection.Open();
+            string query = "SELECT * FROM Latihan";
+            SqlCommand cmd = new SqlCommand(query, connection);
+            cmd.CommandType = CommandType.Text;
+            SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+            adapter.Fill(dataTable);
+
+
+            dataGridView1.DataSource = dataTable;
 
         }
 

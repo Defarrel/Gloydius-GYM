@@ -28,11 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.nama = new System.Windows.Forms.TextBox();
-            this.memberBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.gYMDataSet = new Gym_desktop.GYMDataSet();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
@@ -43,15 +40,13 @@
             this.umur = new System.Windows.Forms.TextBox();
             this.no_hp = new System.Windows.Forms.TextBox();
             this.btnTambah = new System.Windows.Forms.Button();
-            this.memberTableAdapter = new Gym_desktop.GYMDataSetTableAdapters.MemberTableAdapter();
             this.daftar = new System.Windows.Forms.DateTimePicker();
             this.tenggat = new System.Windows.Forms.DateTimePicker();
             this.cari = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.gambar = new System.Windows.Forms.TextBox();
             this.backBtn = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.memberBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gYMDataSet)).BeginInit();
+            this.lanjut = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -73,89 +68,72 @@
             this.nama.Name = "nama";
             this.nama.Size = new System.Drawing.Size(305, 35);
             this.nama.TabIndex = 2;
-            this.nama.TextChanged += new System.EventHandler(this.label2_Click);
-            // 
-            // memberBindingSource
-            // 
-            this.memberBindingSource.DataMember = "Member";
-            this.memberBindingSource.DataSource = this.gYMDataSet;
-            // 
-            // gYMDataSet
-            // 
-            this.gYMDataSet.DataSetName = "GYMDataSet";
-            this.gYMDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(203, 202);
+            this.label2.Location = new System.Drawing.Point(134, 202);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(125, 18);
             this.label2.TabIndex = 3;
             this.label2.Text = "Masukan Nama";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.White;
-            this.label3.Location = new System.Drawing.Point(203, 262);
+            this.label3.Location = new System.Drawing.Point(134, 262);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(173, 18);
+            this.label3.Size = new System.Drawing.Size(297, 18);
             this.label3.TabIndex = 4;
-            this.label3.Text = "Masukan Berat Badan";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
+            this.label3.Text = "Masukan Berat Badan (Contoh: 70KG)";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(203, 323);
+            this.label4.Location = new System.Drawing.Point(134, 323);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(122, 18);
             this.label4.TabIndex = 5;
             this.label4.Text = "Masukan Umur";
-            this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.White;
-            this.label5.Location = new System.Drawing.Point(203, 381);
+            this.label5.Location = new System.Drawing.Point(134, 381);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(159, 18);
             this.label5.TabIndex = 6;
             this.label5.Text = "Masukan Nomor Hp";
-            this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.White;
-            this.label6.Location = new System.Drawing.Point(203, 440);
+            this.label6.Location = new System.Drawing.Point(134, 440);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(191, 18);
             this.label6.TabIndex = 7;
             this.label6.Text = "Masukan Tanggal Daftar";
-            this.label6.Click += new System.EventHandler(this.label6_Click);
             // 
             // label7
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.Color.White;
-            this.label7.Location = new System.Drawing.Point(203, 496);
+            this.label7.Location = new System.Drawing.Point(134, 496);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(205, 18);
             this.label7.TabIndex = 8;
             this.label7.Text = "Masukan Tanggal Tenggat";
-            this.label7.Click += new System.EventHandler(this.label7_Click);
             // 
             // berat_badan
             // 
@@ -165,7 +143,6 @@
             this.berat_badan.Name = "berat_badan";
             this.berat_badan.Size = new System.Drawing.Size(305, 35);
             this.berat_badan.TabIndex = 9;
-            this.berat_badan.TextChanged += new System.EventHandler(this.berat_badan_TextChanged);
             // 
             // umur
             // 
@@ -175,7 +152,6 @@
             this.umur.Name = "umur";
             this.umur.Size = new System.Drawing.Size(305, 35);
             this.umur.TabIndex = 10;
-            this.umur.TextChanged += new System.EventHandler(this.umur_TextChanged);
             // 
             // no_hp
             // 
@@ -185,7 +161,6 @@
             this.no_hp.Name = "no_hp";
             this.no_hp.Size = new System.Drawing.Size(305, 35);
             this.no_hp.TabIndex = 11;
-            this.no_hp.TextChanged += new System.EventHandler(this.no_hp_TextChanged);
             // 
             // btnTambah
             // 
@@ -197,10 +172,6 @@
             this.btnTambah.Text = "Tambah";
             this.btnTambah.UseVisualStyleBackColor = true;
             this.btnTambah.Click += new System.EventHandler(this.btnTambah_Click);
-            // 
-            // memberTableAdapter
-            // 
-            this.memberTableAdapter.ClearBeforeFill = true;
             // 
             // daftar
             // 
@@ -234,7 +205,7 @@
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.ForeColor = System.Drawing.Color.White;
-            this.label8.Location = new System.Drawing.Point(203, 550);
+            this.label8.Location = new System.Drawing.Point(134, 550);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(116, 18);
             this.label8.TabIndex = 19;
@@ -248,7 +219,6 @@
             this.gambar.Name = "gambar";
             this.gambar.Size = new System.Drawing.Size(182, 24);
             this.gambar.TabIndex = 20;
-            this.gambar.TextChanged += new System.EventHandler(this.gambar_TextChanged);
             // 
             // backBtn
             // 
@@ -264,12 +234,24 @@
             this.backBtn.UseVisualStyleBackColor = false;
             this.backBtn.Click += new System.EventHandler(this.backBtn_Click);
             // 
+            // lanjut
+            // 
+            this.lanjut.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold);
+            this.lanjut.Location = new System.Drawing.Point(882, 472);
+            this.lanjut.Name = "lanjut";
+            this.lanjut.Size = new System.Drawing.Size(126, 62);
+            this.lanjut.TabIndex = 21;
+            this.lanjut.Text = "Lanjut Transaksi";
+            this.lanjut.UseVisualStyleBackColor = true;
+            this.lanjut.Click += new System.EventHandler(this.lanjut_Click);
+            // 
             // tambahMember
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkSlateGray;
             this.ClientSize = new System.Drawing.Size(1132, 672);
+            this.Controls.Add(this.lanjut);
             this.Controls.Add(this.gambar);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.cari);
@@ -293,8 +275,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Tambah Member";
             this.Load += new System.EventHandler(this.label2_Click);
-            ((System.ComponentModel.ISupportInitialize)(this.memberBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gYMDataSet)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -315,13 +295,11 @@
         private System.Windows.Forms.TextBox no_hp;
         private System.Windows.Forms.Button btnTambah;
         private System.Windows.Forms.Button backBtn;
-        private GYMDataSet gYMDataSet;
-        private System.Windows.Forms.BindingSource memberBindingSource;
-        private GYMDataSetTableAdapters.MemberTableAdapter memberTableAdapter;
         private System.Windows.Forms.DateTimePicker daftar;
         private System.Windows.Forms.DateTimePicker tenggat;
         private System.Windows.Forms.Button cari;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox gambar;
+        private System.Windows.Forms.Button lanjut;
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.IO;
 using System.Windows.Forms;
@@ -8,12 +9,12 @@ namespace Gym_desktop
 {
     public partial class updateMember : Form
     {
-        DataTable dt;
-        DataRow dr;
-        Image curImage;
-        string curFIleName;
-
+        string strKoneksi = "Data Source = DEFARREL; Initial Catalog = GYM;" +
+            "Integrated Security = True; MultipleActiveResultSets=true";
+        string curFileName;
         int bttn;
+        Image curImage;
+
         public updateMember()
         {
             InitializeComponent();
@@ -21,8 +22,24 @@ namespace Gym_desktop
 
         private void updateMember_Load(object sender, EventArgs e)
         {
-            // This line of code loads data into the 'gYMDataSet.Member' table. You can move, or remove it, as needed.
-            this.memberTableAdapter.Fill(this.gYMDataSet.Member);
+            LoadData();
+        }
+
+        private void LoadData()
+        {
+            DataTable dataTable = new DataTable();
+
+            using (SqlConnection connection = new SqlConnection(strKoneksi))
+            {
+                connection.Open();
+                string query = "SELECT * FROM Member";
+                SqlCommand cmd = new SqlCommand(query, connection);
+                cmd.CommandType = CommandType.Text;
+                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                adapter.Fill(dataTable);
+            }
+
+            dataGridView1.DataSource = dataTable;
         }
 
         private void backBtn_Click(object sender, EventArgs e)
@@ -35,25 +52,27 @@ namespace Gym_desktop
             if (e.RowIndex >= 0)
             {
                 DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
-                    ID.Text = row.Cells[0].Value.ToString();
+                ID.Text = row.Cells[0].Value.ToString();
                 nama.Text = row.Cells[1].Value.ToString();
-                    berat_badan.Text = row.Cells[2].Value.ToString();
-                if (row.Cells[3].Value != null && int.TryParse(row.Cells[3].Value.ToString(), out int umurValue))  
+                berat_badan.Text = row.Cells[2].Value.ToString();
+
+                if (row.Cells[3].Value != null && int.TryParse(row.Cells[3].Value.ToString(), out int umurValue))
                 {
                     umur.Text = umurValue.ToString();
                 }
                 else
                 {
-                    umur.Text = "0"; 
+                    umur.Text = "0";
                 }
-                    no_hp.Text = row.Cells[4].Value.ToString(); 
 
-                if (row.Cells[5].Value != null && DateTime.TryParse(row.Cells[5].Value.ToString(), out DateTime daftarValue))  // Asumsikan Tgl_daftar adalah kolom kelima
+                no_hp.Text = row.Cells[4].Value.ToString();
+
+                if (row.Cells[5].Value != null && DateTime.TryParse(row.Cells[5].Value.ToString(), out DateTime daftarValue))
                 {
                     daftar.Value = daftarValue;
                 }
 
-                if (row.Cells[6].Value != null && DateTime.TryParse(row.Cells[6].Value.ToString(), out DateTime tenggatValue))  // Asumsikan Tgl_tenggat adalah kolom keenam
+                if (row.Cells[6].Value != null && DateTime.TryParse(row.Cells[6].Value.ToString(), out DateTime tenggatValue))
                 {
                     tenggat.Value = tenggatValue;
                 }
@@ -61,56 +80,24 @@ namespace Gym_desktop
                 if (row.Cells[7].Value != null && row.Cells[7].Value is byte[])
                 {
                     byte[] imageData = (byte[])row.Cells[7].Value;
-                    gambar.Text = BitConverter.ToString(imageData);
+                    using (MemoryStream ms = new MemoryStream(imageData))
+                    {
+                        curImage = Image.FromStream(ms);
+                    }
                 }
                 else
                 {
-                    gambar.Text = string.Empty;
+                    curImage = null;
                 }
             }
-        }
-
-
-
-        private void textBoxID_TextChanged(object sender, EventArgs e)
-        {
-        }
-
-        private void btnSearch_Click(object sender, EventArgs e)
-        {
-            string searchID = textBoxID.Text.Trim();
-            if (string.IsNullOrEmpty(searchID))
-            {
-                MessageBox.Show("Silakan masukkan nama untuk mencari.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            DataView dv = new DataView(gYMDataSet.Tables["Member"]);
-            dv.RowFilter = string.Format("Convert(Nama_member, 'System.String') like '{0}%'", searchID);
-            dataGridView1.DataSource = dv;
-
-            if (dv.Count == 0)
-            {
-                MessageBox.Show("Tidak ada member yang ditemukan dengan nama tersebut.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-        }
-
-
-        private void RefreshButton_Click_1(object sender, EventArgs e)
-        {
-            textBoxID.Text = string.Empty;
-            DataView dv = new DataView(gYMDataSet.Tables["Member"]);
-            dataGridView1.DataSource = dv;
-
         }
 
         private void update_Click(object sender, EventArgs e)
         {
-
             if (string.IsNullOrWhiteSpace(nama.Text) ||
-            string.IsNullOrWhiteSpace(berat_badan.Text) ||
-            string.IsNullOrWhiteSpace(umur.Text) ||
-            string.IsNullOrWhiteSpace(no_hp.Text))
+                string.IsNullOrWhiteSpace(berat_badan.Text) ||
+                string.IsNullOrWhiteSpace(umur.Text) ||
+                string.IsNullOrWhiteSpace(no_hp.Text))
             {
                 MessageBox.Show("Semua field harus diisi!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -127,50 +114,44 @@ namespace Gym_desktop
                 MessageBox.Show("Nomor hp harus terdiri dari 12 digit angka!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+
+            byte[] imageData = null;
             if (bttn == 1)
             {
-                FileStream file = new FileStream(curFIleName, FileMode.OpenOrCreate, FileAccess.Read);
-                byte[] rawdata = new byte[file.Length];
-                file.Read(rawdata, 0, System.Convert.ToInt32(file.Length));
-                file.Close();
-
-                dt = gYMDataSet.Tables["Member"];
-                //mencari primary key yang akan diubah datanya
-                dr = dt.Rows.Find(ID.Text);
-
-                dr.BeginEdit();
-                dr["Nama_member"] = nama.Text;
-                dr["Berat_bdn"] = berat_badan.Text;
-                dr["Umur"] = umurValue;
-                dr["No_hp"] = no_hp.Text;
-                dr["Tgl_daftar"] = daftar.Value;
-                dr["Tgl_tenggat"] = tenggat.Value;
-                dr["Gambar"] = rawdata;
-                dr.EndEdit();
-
-                MessageBox.Show("Data berhasil diupdate!", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                using (FileStream file = new FileStream(curFileName, FileMode.OpenOrCreate, FileAccess.Read))
+                {
+                    imageData = new byte[file.Length];
+                    file.Read(imageData, 0, (int)file.Length);
+                }
             }
-            else
-            {
-                dt = gYMDataSet.Tables["Member"];
-                //mencari primary key yang akan diubah datanya
-                dr = dt.Rows.Find(ID.Text);
 
-                dr.BeginEdit();
-                dr["Nama_member"] = nama.Text;
-                dr["Berat_bdn"] = berat_badan.Text;
-                dr["Umur"] = umurValue;
-                dr["No_hp"] = no_hp.Text;
-                dr["Tgl_daftar"] = daftar.Value;
-                dr["Tgl_tenggat"] = tenggat.Value;
-                dr.EndEdit();
+            using (SqlConnection connection = new SqlConnection(strKoneksi))
+            {
+                connection.Open();
+                string query = bttn == 1 ?
+                    "UPDATE Member SET Nama_member = @nama, Berat_bdn = @berat, Umur = @umur, No_hp = @no_hp, Tgl_daftar = @daftar, Tgl_tenggat = @tenggat, Gambar = @gambar WHERE Id_member = @id" :
+                    "UPDATE Member SET Nama_member = @nama, Berat_bdn = @berat, Umur = @umur, No_hp = @no_hp, Tgl_daftar = @daftar, Tgl_tenggat = @tenggat WHERE Id_member = @id";
+
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@id", ID.Text);
+                    command.Parameters.AddWithValue("@nama", nama.Text);
+                    command.Parameters.AddWithValue("@berat", berat_badan.Text);
+                    command.Parameters.AddWithValue("@umur", umurValue);
+                    command.Parameters.AddWithValue("@no_hp", no_hp.Text);
+                    command.Parameters.AddWithValue("@daftar", daftar.Value);
+                    command.Parameters.AddWithValue("@tenggat", tenggat.Value);
+                    if (bttn == 1)
+                    {
+                        command.Parameters.AddWithValue("@gambar", imageData);
+                    }
+
+                    command.ExecuteNonQuery();
+                }
             }
 
             MessageBox.Show("Data berhasil diupdate!", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-            memberTableAdapter.Update(gYMDataSet);
-
-            this.memberTableAdapter.Fill(this.gYMDataSet.Member);
+            LoadData();
         }
 
         private bool IsNumeric(string text)
@@ -187,13 +168,44 @@ namespace Gym_desktop
 
         private void upload_Click(object sender, EventArgs e)
         {
-
             bttn = 1;
             OpenFileDialog openDlg = new OpenFileDialog();
             if (openDlg.ShowDialog() == DialogResult.OK)
             {
-                curFIleName = openDlg.FileName;
+                curFileName = openDlg.FileName;
                 gambar.Text = openDlg.FileName;
+            }
+        }
+
+        private void textBoxID_TextChanged(object sender, EventArgs e)
+        {
+            string searchID = textBoxID.Text.Trim();
+            if (string.IsNullOrEmpty(searchID))
+            {
+                LoadData();
+            }
+
+            DataTable dataTable = new DataTable();
+            using (SqlConnection connection = new SqlConnection(strKoneksi))
+            {
+                string query = "SELECT * FROM Member WHERE Nama_member LIKE @searchID";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@searchID", searchID + "%");
+
+                    using (SqlDataAdapter adapter = new SqlDataAdapter(command))
+                    {
+                        connection.Open();
+                        adapter.Fill(dataTable);
+                    }
+                }
+            }
+
+            dataGridView1.DataSource = dataTable;
+
+            if (dataTable.Rows.Count == 0)
+            {
+                MessageBox.Show("Tidak ada member yang ditemukan dengan nama tersebut.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
     }

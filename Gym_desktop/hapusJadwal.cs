@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Data;
+using System.Data.SqlClient;
 using System.Windows.Forms;
 
 namespace Gym_desktop
 {
     public partial class hapusJadwal : Form
     {
-        DataRow dr;
+        string strKoneksi = "Data Source = DEFARREL; Initial Catalog = GYM;" +
+"Integrated Security = True; MultipleActiveResultSets=true";
         public hapusJadwal()
         {
             InitializeComponent();
@@ -14,9 +16,23 @@ namespace Gym_desktop
 
         private void hapusJadwal_Load(object sender, EventArgs e)
         {
-            // TODO: This line of code loads data into the 'gYMDataSet.Jadwal' table. You can move, or remove it, as needed.
-            this.jadwalTableAdapter.Fill(this.gYMDataSet.Jadwal);
+            LoadData();
+        }
 
+        public void LoadData()
+        {
+            DataTable dataTable = new DataTable();
+
+            SqlConnection connection = new SqlConnection(strKoneksi);
+            connection.Open();
+            string query = "SELECT * FROM Jadwal";
+            SqlCommand cmd = new SqlCommand(query, connection);
+            cmd.CommandType = CommandType.Text;
+            SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+            adapter.Fill(dataTable);
+
+
+            dataGridView1.DataSource = dataTable;
         }
 
         private void btnHapus_Click(object sender, EventArgs e)
@@ -35,19 +51,25 @@ namespace Gym_desktop
         {
             string code = hapus_text.Text;
 
-            dr = gYMDataSet.Tables["Jadwal"].Rows.Find(code);
-
-            if (dr != null)
+            SqlConnection connection = new SqlConnection(strKoneksi);
             {
-                dr.Delete();
+                connection.Open();
 
-                jadwalTableAdapter.Update(gYMDataSet);
+                string query = "DELETE FROM Jadwal WHERE Id_jadwal = @Id";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@Id", code);
 
-                MessageBox.Show("Data berhasil dihapus!", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            else
-            {
-                MessageBox.Show("Data tidak ditemukan.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    int rowsAffected = command.ExecuteNonQuery();
+                    if (rowsAffected > 0)
+                    {
+                        MessageBox.Show("Data berhasil dihapus!", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Data tidak ditemukan.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
             }
         }
 
@@ -59,6 +81,13 @@ namespace Gym_desktop
         private void label1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            LoadData();
+            DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
+            hapus_text.Text = row.Cells["Id_jadwal"].Value.ToString();
         }
     }
 }

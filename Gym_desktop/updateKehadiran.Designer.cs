@@ -28,23 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             this.update = new System.Windows.Forms.Button();
-            this.RefreshButton = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.idkehadiranDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.kehadiranDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tanggalkehadiranDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.idtrainerDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.idjadwalDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.kehadiranTrainerBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.gYMDataSet2 = new Gym_desktop.GYMDataSet2();
             this.backBtn = new System.Windows.Forms.Button();
-            this.cari = new System.Windows.Forms.Button();
             this.textBoxID = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -58,16 +48,13 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.ID = new System.Windows.Forms.TextBox();
-            this.kehadiranTrainerTableAdapter = new Gym_desktop.GYMDataSet2TableAdapters.KehadiranTrainerTableAdapter();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.kehadiranTrainerBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gYMDataSet2)).BeginInit();
             this.SuspendLayout();
             // 
             // update
             // 
             this.update.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold);
-            this.update.Location = new System.Drawing.Point(781, 551);
+            this.update.Location = new System.Drawing.Point(1008, 549);
             this.update.Name = "update";
             this.update.Size = new System.Drawing.Size(96, 46);
             this.update.TabIndex = 61;
@@ -75,108 +62,49 @@
             this.update.UseVisualStyleBackColor = true;
             this.update.Click += new System.EventHandler(this.update_Click);
             // 
-            // RefreshButton
-            // 
-            this.RefreshButton.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold);
-            this.RefreshButton.Location = new System.Drawing.Point(1008, 551);
-            this.RefreshButton.Name = "RefreshButton";
-            this.RefreshButton.Size = new System.Drawing.Size(96, 46);
-            this.RefreshButton.TabIndex = 45;
-            this.RefreshButton.Text = "Refresh";
-            this.RefreshButton.UseVisualStyleBackColor = true;
-            this.RefreshButton.Click += new System.EventHandler(this.RefreshButton_Click);
-            // 
             // dataGridView1
             // 
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.AllowUserToOrderColumns = true;
-            this.dataGridView1.AutoGenerateColumns = false;
             this.dataGridView1.BackgroundColor = System.Drawing.Color.DarkSlateGray;
             this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.DarkCyan;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle9.BackColor = System.Drawing.Color.DarkCyan;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle9;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.idkehadiranDataGridViewTextBoxColumn,
-            this.kehadiranDataGridViewTextBoxColumn,
-            this.tanggalkehadiranDataGridViewTextBoxColumn,
-            this.idtrainerDataGridViewTextBoxColumn,
-            this.idjadwalDataGridViewTextBoxColumn});
-            this.dataGridView1.DataSource = this.kehadiranTrainerBindingSource;
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle10.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle10.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle10;
             this.dataGridView1.GridColor = System.Drawing.Color.DarkCyan;
             this.dataGridView1.Location = new System.Drawing.Point(613, 153);
             this.dataGridView1.Name = "dataGridView1";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle11;
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Comic Sans MS", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("Comic Sans MS", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle12;
             this.dataGridView1.RowTemplate.DefaultCellStyle.BackColor = System.Drawing.Color.White;
             this.dataGridView1.Size = new System.Drawing.Size(507, 273);
             this.dataGridView1.TabIndex = 44;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
-            // 
-            // idkehadiranDataGridViewTextBoxColumn
-            // 
-            this.idkehadiranDataGridViewTextBoxColumn.DataPropertyName = "Id_kehadiran";
-            this.idkehadiranDataGridViewTextBoxColumn.HeaderText = "Id_kehadiran";
-            this.idkehadiranDataGridViewTextBoxColumn.Name = "idkehadiranDataGridViewTextBoxColumn";
-            // 
-            // kehadiranDataGridViewTextBoxColumn
-            // 
-            this.kehadiranDataGridViewTextBoxColumn.DataPropertyName = "Kehadiran";
-            this.kehadiranDataGridViewTextBoxColumn.HeaderText = "Kehadiran";
-            this.kehadiranDataGridViewTextBoxColumn.Name = "kehadiranDataGridViewTextBoxColumn";
-            // 
-            // tanggalkehadiranDataGridViewTextBoxColumn
-            // 
-            this.tanggalkehadiranDataGridViewTextBoxColumn.DataPropertyName = "Tanggal_kehadiran";
-            this.tanggalkehadiranDataGridViewTextBoxColumn.HeaderText = "Tanggal_kehadiran";
-            this.tanggalkehadiranDataGridViewTextBoxColumn.Name = "tanggalkehadiranDataGridViewTextBoxColumn";
-            // 
-            // idtrainerDataGridViewTextBoxColumn
-            // 
-            this.idtrainerDataGridViewTextBoxColumn.DataPropertyName = "Id_trainer";
-            this.idtrainerDataGridViewTextBoxColumn.HeaderText = "Id_trainer";
-            this.idtrainerDataGridViewTextBoxColumn.Name = "idtrainerDataGridViewTextBoxColumn";
-            // 
-            // idjadwalDataGridViewTextBoxColumn
-            // 
-            this.idjadwalDataGridViewTextBoxColumn.DataPropertyName = "Id_jadwal";
-            this.idjadwalDataGridViewTextBoxColumn.HeaderText = "Id_jadwal";
-            this.idjadwalDataGridViewTextBoxColumn.Name = "idjadwalDataGridViewTextBoxColumn";
-            // 
-            // kehadiranTrainerBindingSource
-            // 
-            this.kehadiranTrainerBindingSource.DataMember = "KehadiranTrainer";
-            this.kehadiranTrainerBindingSource.DataSource = this.gYMDataSet2;
-            // 
-            // gYMDataSet2
-            // 
-            this.gYMDataSet2.DataSetName = "GYMDataSet2";
-            this.gYMDataSet2.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // backBtn
             // 
@@ -192,17 +120,6 @@
             this.backBtn.UseVisualStyleBackColor = false;
             this.backBtn.Click += new System.EventHandler(this.backBtn_Click);
             // 
-            // cari
-            // 
-            this.cari.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold);
-            this.cari.Location = new System.Drawing.Point(896, 551);
-            this.cari.Name = "cari";
-            this.cari.Size = new System.Drawing.Size(96, 46);
-            this.cari.TabIndex = 42;
-            this.cari.Text = "Cari";
-            this.cari.UseVisualStyleBackColor = true;
-            this.cari.Click += new System.EventHandler(this.cari_Click);
-            // 
             // textBoxID
             // 
             this.textBoxID.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
@@ -211,6 +128,7 @@
             this.textBoxID.Name = "textBoxID";
             this.textBoxID.Size = new System.Drawing.Size(305, 35);
             this.textBoxID.TabIndex = 41;
+            this.textBoxID.TextChanged += new System.EventHandler(this.textBoxID_TextChanged);
             // 
             // label2
             // 
@@ -219,9 +137,9 @@
             this.label2.ForeColor = System.Drawing.Color.White;
             this.label2.Location = new System.Drawing.Point(592, 498);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(186, 18);
+            this.label2.Size = new System.Drawing.Size(146, 18);
             this.label2.TabIndex = 40;
-            this.label2.Text = "Cari Nama Id Kehadiran";
+            this.label2.Text = "Cari Nama Trainer";
             // 
             // label1
             // 
@@ -332,10 +250,6 @@
             this.ID.Size = new System.Drawing.Size(305, 35);
             this.ID.TabIndex = 63;
             // 
-            // kehadiranTrainerTableAdapter
-            // 
-            this.kehadiranTrainerTableAdapter.ClearBeforeFill = true;
-            // 
             // updateKehadiran
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -353,10 +267,8 @@
             this.Controls.Add(this.label7);
             this.Controls.Add(this.ID);
             this.Controls.Add(this.update);
-            this.Controls.Add(this.RefreshButton);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.backBtn);
-            this.Controls.Add(this.cari);
             this.Controls.Add(this.textBoxID);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -366,8 +278,6 @@
             this.Text = "updateKehadiran";
             this.Load += new System.EventHandler(this.updateKehadiran_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.kehadiranTrainerBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gYMDataSet2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -375,10 +285,8 @@
 
         #endregion
         private System.Windows.Forms.Button update;
-        private System.Windows.Forms.Button RefreshButton;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button backBtn;
-        private System.Windows.Forms.Button cari;
         private System.Windows.Forms.TextBox textBoxID;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
@@ -392,13 +300,5 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox ID;
-        private GYMDataSet2 gYMDataSet2;
-        private System.Windows.Forms.BindingSource kehadiranTrainerBindingSource;
-        private GYMDataSet2TableAdapters.KehadiranTrainerTableAdapter kehadiranTrainerTableAdapter;
-        private System.Windows.Forms.DataGridViewTextBoxColumn idkehadiranDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn kehadiranDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn tanggalkehadiranDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn idtrainerDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn idjadwalDataGridViewTextBoxColumn;
     }
 }

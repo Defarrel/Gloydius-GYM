@@ -1,18 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data.SqlClient;
 using System.Windows.Forms;
 
 namespace Gym_desktop
 {
     public partial class hapusLatihan : Form
     {
-        DataRow dr;
+        string strKoneksi = "Data Source = DEFARREL; Initial Catalog = GYM;" +
+            "Integrated Security = True; MultipleActiveResultSets=true";
         public hapusLatihan()
         {
             InitializeComponent();
@@ -20,9 +16,24 @@ namespace Gym_desktop
 
         private void hapusLatihan_Load(object sender, EventArgs e)
         {
-            // TODO: This line of code loads data into the 'gYMDataSet2.Latihan' table. You can move, or remove it, as needed.
-            this.latihanTableAdapter.Fill(this.gYMDataSet2.Latihan);
 
+            LoadData();
+        }
+
+        public void LoadData()
+        {
+            DataTable dataTable = new DataTable();
+
+            SqlConnection connection = new SqlConnection(strKoneksi);
+            connection.Open();
+            string query = "SELECT * FROM Latihan";
+            SqlCommand cmd = new SqlCommand(query, connection);
+            cmd.CommandType = CommandType.Text;
+            SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+            adapter.Fill(dataTable);
+
+
+            dataGridView1.DataSource = dataTable;
         }
 
         private void btnHapus_Click(object sender, EventArgs e)
@@ -41,25 +52,38 @@ namespace Gym_desktop
         {
             string code = hapus_text.Text;
 
-            dr = gYMDataSet2.Tables["Latihan"].Rows.Find(code);
-
-            if (dr != null)
+            SqlConnection connection = new SqlConnection(strKoneksi);
             {
-                dr.Delete();
+                connection.Open();
 
-                latihanTableAdapter.Update(gYMDataSet2);
+                string query = "DELETE FROM Latihan WHERE Id_latihan = @Id";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@Id", code);
 
-                MessageBox.Show("Data berhasil dihapus!", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            else
-            {
-                MessageBox.Show("Data tidak ditemukan.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    int rowsAffected = command.ExecuteNonQuery();
+                    if (rowsAffected > 0)
+                    {
+                        MessageBox.Show("Data berhasil dihapus!", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Data tidak ditemukan.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
             }
         }
 
         private void backBtn_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            LoadData();
+            DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
+            hapus_text.Text = row.Cells["Id_latihan"].Value.ToString();
         }
     }
 }

@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Data;
+using System.Data.SqlClient;
 using System.Windows.Forms;
 
 namespace Gym_desktop
 {
     public partial class updateTrainer : Form
     {
+        string strKoneksi = "Data Source = DEFARREL; Initial Catalog = GYM; Integrated Security = True; MultipleActiveResultSets=true";
 
-        DataTable dt;
-        DataRow dr;
         public updateTrainer()
         {
             InitializeComponent();
@@ -16,41 +16,26 @@ namespace Gym_desktop
 
         private void updateTrainer_Load(object sender, EventArgs e)
         {
-            // TODO: This line of code loads data into the 'gYMDataSet.PersonalTrainer' table. You can move, or remove it, as needed.
-            this.personalTrainerTableAdapter.Fill(this.gYMDataSet.PersonalTrainer);
+            LoadData();
         }
 
-
-        private void cari_Click(object sender, EventArgs e)
+        private void LoadData()
         {
-            string searchID = textBoxID.Text.Trim();
-            if (string.IsNullOrEmpty(searchID))
+            DataTable dataTable = new DataTable();
+
+            using (SqlConnection connection = new SqlConnection(strKoneksi))
             {
-                MessageBox.Show("Silakan masukkan Nama untuk mencari.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+                connection.Open();
+                string query = "SELECT * FROM PersonalTrainer";
+                SqlCommand cmd = new SqlCommand(query, connection);
+                cmd.CommandType = CommandType.Text;
+                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                adapter.Fill(dataTable);
             }
 
-            DataView dv = new DataView(gYMDataSet.Tables["PersonalTrainer"]);
-            dv.RowFilter = string.Format("Convert(Nama_trainer, 'System.String') like '{0}%'", searchID);
-            dataGridView1.DataSource = dv;
-
-            if (dv.Count == 0)
-            {
-                MessageBox.Show("Tidak ada trainer yang ditemukan dengan nama tersebut.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
+            dataGridView1.DataSource = dataTable;
         }
 
-        private void backBtn_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-        private void RefreshButton_Click(object sender, EventArgs e)
-        {
-            textBoxID.Text = string.Empty;
-            DataView dv = new DataView(gYMDataSet.Tables["PersonalTrainer"]);
-            dataGridView1.DataSource = dv;
-        }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -62,6 +47,11 @@ namespace Gym_desktop
                 no_hp.Text = row.Cells[2].Value.ToString();
 
             }
+        }
+
+        private void backBtn_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
 
         private void update_Click(object sender, EventArgs e)
@@ -80,31 +70,22 @@ namespace Gym_desktop
                 return;
             }
 
-            dt = gYMDataSet.Tables["PersonalTrainer"];
-            dr = dt.Rows.Find(id_trainer.Text);
-
-            dr.BeginEdit();
-            dr["Id_trainer"] = id_trainer.Text;
-            dr["Nama_trainer"] = nama_trainer.Text;
-            dr["No_hp_trainer"] = no_hp.Text;
-            dr.EndEdit();
-
-            try
+            using (SqlConnection connection = new SqlConnection(strKoneksi))
             {
-                personalTrainerTableAdapter.Update(gYMDataSet);
-                this.personalTrainerTableAdapter.Fill(this.gYMDataSet.PersonalTrainer);
+                string query = "UPDATE PersonalTrainer SET Nama_trainer = @nama_trainer, No_hp_trainer = @no_hp_trainer WHERE Id_trainer = @id_trainer";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@id_trainer", id_trainer.Text);
+                    command.Parameters.AddWithValue("@nama_trainer", nama_trainer.Text);
+                    command.Parameters.AddWithValue("@no_hp_trainer", no_hp.Text);
 
-                MessageBox.Show("Data berhasil diupdate!", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                id_trainer.Enabled = false;
-                nama_trainer.Enabled = false;
-                no_hp.Enabled = false;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Terjadi kesalahan saat menyimpan data: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                }
             }
 
+            MessageBox.Show("Data berhasil diupdate!", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            LoadData();
         }
 
         private bool IsNumeric(string text)
@@ -117,6 +98,35 @@ namespace Gym_desktop
                 }
             }
             return true;
+        }
+
+        private void textBoxID_TextChanged(object sender, EventArgs e)
+        {
+            string searchNama = textBoxID.Text.Trim();
+            if (string.IsNullOrEmpty(searchNama))
+            {
+                LoadData();
+            }
+
+            using (SqlConnection connection = new SqlConnection(strKoneksi))
+            {
+                DataTable searchResults = new DataTable();
+                string query = "SELECT * FROM PersonalTrainer WHERE Nama_trainer LIKE @searchNama";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@searchNama", searchNama + "%");
+                    SqlDataAdapter adapter = new SqlDataAdapter(command);
+                    connection.Open();
+                    adapter.Fill(searchResults);
+                }
+
+                dataGridView1.DataSource = searchResults;
+
+                if (searchResults.Rows.Count == 0)
+                {
+                    MessageBox.Show("Tidak ada trainer yang ditemukan dengan nama tersebut.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
         }
     }
 }

@@ -28,28 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.riwayat_latihanTableAdapter = new Gym_desktop.GYMDataSet2TableAdapters.Riwayat_latihanTableAdapter();
-            this.gYMDataSet2 = new Gym_desktop.GYMDataSet2();
-            this.riwayatlatihanBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.latihanBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.latihanTableAdapter = new Gym_desktop.GYMDataSet2TableAdapters.LatihanTableAdapter();
             this.update = new System.Windows.Forms.Button();
-            this.RefreshButton = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.idlatihanDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.jenislatihanDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.gerakangerakanDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tgllatihanDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.durasilatihanDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.idmemberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.idtrainerDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.backBtn = new System.Windows.Forms.Button();
-            this.cari = new System.Windows.Forms.Button();
             this.textBoxID = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -57,7 +42,6 @@
             this.label8 = new System.Windows.Forms.Label();
             this.id_member = new System.Windows.Forms.TextBox();
             this.tanggal = new System.Windows.Forms.DateTimePicker();
-            this.durasi = new System.Windows.Forms.TextBox();
             this.gerakan = new System.Windows.Forms.TextBox();
             this.latihan = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -67,39 +51,14 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.ID = new System.Windows.Forms.TextBox();
-            ((System.ComponentModel.ISupportInitialize)(this.gYMDataSet2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.riwayatlatihanBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.latihanBindingSource)).BeginInit();
+            this.durasi = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // riwayat_latihanTableAdapter
-            // 
-            this.riwayat_latihanTableAdapter.ClearBeforeFill = true;
-            // 
-            // gYMDataSet2
-            // 
-            this.gYMDataSet2.DataSetName = "GYMDataSet2";
-            this.gYMDataSet2.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // riwayatlatihanBindingSource
-            // 
-            this.riwayatlatihanBindingSource.DataMember = "Riwayat_latihan";
-            this.riwayatlatihanBindingSource.DataSource = this.gYMDataSet2;
-            // 
-            // latihanBindingSource
-            // 
-            this.latihanBindingSource.DataMember = "Latihan";
-            this.latihanBindingSource.DataSource = this.gYMDataSet2;
-            // 
-            // latihanTableAdapter
-            // 
-            this.latihanTableAdapter.ClearBeforeFill = true;
             // 
             // update
             // 
             this.update.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold);
-            this.update.Location = new System.Drawing.Point(781, 551);
+            this.update.Location = new System.Drawing.Point(1008, 552);
             this.update.Name = "update";
             this.update.Size = new System.Drawing.Size(96, 46);
             this.update.TabIndex = 61;
@@ -107,23 +66,11 @@
             this.update.UseVisualStyleBackColor = true;
             this.update.Click += new System.EventHandler(this.update_Click);
             // 
-            // RefreshButton
-            // 
-            this.RefreshButton.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold);
-            this.RefreshButton.Location = new System.Drawing.Point(1008, 551);
-            this.RefreshButton.Name = "RefreshButton";
-            this.RefreshButton.Size = new System.Drawing.Size(96, 46);
-            this.RefreshButton.TabIndex = 45;
-            this.RefreshButton.Text = "Refresh";
-            this.RefreshButton.UseVisualStyleBackColor = true;
-            this.RefreshButton.Click += new System.EventHandler(this.RefreshButton_Click);
-            // 
             // dataGridView1
             // 
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.AllowUserToOrderColumns = true;
-            this.dataGridView1.AutoGenerateColumns = false;
             this.dataGridView1.BackgroundColor = System.Drawing.Color.DarkSlateGray;
             this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
@@ -135,15 +82,6 @@
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.idlatihanDataGridViewTextBoxColumn,
-            this.jenislatihanDataGridViewTextBoxColumn,
-            this.gerakangerakanDataGridViewTextBoxColumn,
-            this.tgllatihanDataGridViewTextBoxColumn,
-            this.durasilatihanDataGridViewTextBoxColumn,
-            this.idmemberDataGridViewTextBoxColumn,
-            this.idtrainerDataGridViewTextBoxColumn});
-            this.dataGridView1.DataSource = this.latihanBindingSource;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -172,48 +110,6 @@
             this.dataGridView1.TabIndex = 44;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
-            // idlatihanDataGridViewTextBoxColumn
-            // 
-            this.idlatihanDataGridViewTextBoxColumn.DataPropertyName = "Id_latihan";
-            this.idlatihanDataGridViewTextBoxColumn.HeaderText = "Id_latihan";
-            this.idlatihanDataGridViewTextBoxColumn.Name = "idlatihanDataGridViewTextBoxColumn";
-            // 
-            // jenislatihanDataGridViewTextBoxColumn
-            // 
-            this.jenislatihanDataGridViewTextBoxColumn.DataPropertyName = "Jenis_latihan";
-            this.jenislatihanDataGridViewTextBoxColumn.HeaderText = "Jenis_latihan";
-            this.jenislatihanDataGridViewTextBoxColumn.Name = "jenislatihanDataGridViewTextBoxColumn";
-            // 
-            // gerakangerakanDataGridViewTextBoxColumn
-            // 
-            this.gerakangerakanDataGridViewTextBoxColumn.DataPropertyName = "Gerakan_gerakan";
-            this.gerakangerakanDataGridViewTextBoxColumn.HeaderText = "Gerakan_gerakan";
-            this.gerakangerakanDataGridViewTextBoxColumn.Name = "gerakangerakanDataGridViewTextBoxColumn";
-            // 
-            // tgllatihanDataGridViewTextBoxColumn
-            // 
-            this.tgllatihanDataGridViewTextBoxColumn.DataPropertyName = "Tgl_latihan";
-            this.tgllatihanDataGridViewTextBoxColumn.HeaderText = "Tgl_latihan";
-            this.tgllatihanDataGridViewTextBoxColumn.Name = "tgllatihanDataGridViewTextBoxColumn";
-            // 
-            // durasilatihanDataGridViewTextBoxColumn
-            // 
-            this.durasilatihanDataGridViewTextBoxColumn.DataPropertyName = "Durasi_latihan";
-            this.durasilatihanDataGridViewTextBoxColumn.HeaderText = "Durasi_latihan";
-            this.durasilatihanDataGridViewTextBoxColumn.Name = "durasilatihanDataGridViewTextBoxColumn";
-            // 
-            // idmemberDataGridViewTextBoxColumn
-            // 
-            this.idmemberDataGridViewTextBoxColumn.DataPropertyName = "Id_member";
-            this.idmemberDataGridViewTextBoxColumn.HeaderText = "Id_member";
-            this.idmemberDataGridViewTextBoxColumn.Name = "idmemberDataGridViewTextBoxColumn";
-            // 
-            // idtrainerDataGridViewTextBoxColumn
-            // 
-            this.idtrainerDataGridViewTextBoxColumn.DataPropertyName = "Id_trainer";
-            this.idtrainerDataGridViewTextBoxColumn.HeaderText = "Id_trainer";
-            this.idtrainerDataGridViewTextBoxColumn.Name = "idtrainerDataGridViewTextBoxColumn";
-            // 
             // backBtn
             // 
             this.backBtn.BackColor = System.Drawing.Color.Transparent;
@@ -228,17 +124,6 @@
             this.backBtn.UseVisualStyleBackColor = false;
             this.backBtn.Click += new System.EventHandler(this.backBtn_Click);
             // 
-            // cari
-            // 
-            this.cari.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold);
-            this.cari.Location = new System.Drawing.Point(896, 551);
-            this.cari.Name = "cari";
-            this.cari.Size = new System.Drawing.Size(96, 46);
-            this.cari.TabIndex = 42;
-            this.cari.Text = "Cari";
-            this.cari.UseVisualStyleBackColor = true;
-            this.cari.Click += new System.EventHandler(this.cari_Click);
-            // 
             // textBoxID
             // 
             this.textBoxID.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
@@ -247,6 +132,7 @@
             this.textBoxID.Name = "textBoxID";
             this.textBoxID.Size = new System.Drawing.Size(305, 35);
             this.textBoxID.TabIndex = 41;
+            this.textBoxID.TextChanged += new System.EventHandler(this.textBoxID_TextChanged);
             // 
             // label2
             // 
@@ -255,9 +141,9 @@
             this.label2.ForeColor = System.Drawing.Color.White;
             this.label2.Location = new System.Drawing.Point(610, 498);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(119, 18);
+            this.label2.Size = new System.Drawing.Size(154, 18);
             this.label2.TabIndex = 40;
-            this.label2.Text = "Cari ID Latihan";
+            this.label2.Text = "Cari Nama Member";
             // 
             // label1
             // 
@@ -306,15 +192,6 @@
             this.tanggal.Name = "tanggal";
             this.tanggal.Size = new System.Drawing.Size(305, 20);
             this.tanggal.TabIndex = 73;
-            // 
-            // durasi
-            // 
-            this.durasi.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.durasi.Location = new System.Drawing.Point(275, 404);
-            this.durasi.Multiline = true;
-            this.durasi.Name = "durasi";
-            this.durasi.Size = new System.Drawing.Size(305, 35);
-            this.durasi.TabIndex = 72;
             // 
             // gerakan
             // 
@@ -409,17 +286,25 @@
             this.ID.Size = new System.Drawing.Size(305, 35);
             this.ID.TabIndex = 63;
             // 
+            // durasi
+            // 
+            this.durasi.FormattingEnabled = true;
+            this.durasi.Location = new System.Drawing.Point(277, 404);
+            this.durasi.Name = "durasi";
+            this.durasi.Size = new System.Drawing.Size(303, 21);
+            this.durasi.TabIndex = 77;
+            // 
             // updatelatihan
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkSlateGray;
             this.ClientSize = new System.Drawing.Size(1132, 672);
+            this.Controls.Add(this.durasi);
             this.Controls.Add(this.id_trainer);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.id_member);
             this.Controls.Add(this.tanggal);
-            this.Controls.Add(this.durasi);
             this.Controls.Add(this.gerakan);
             this.Controls.Add(this.latihan);
             this.Controls.Add(this.label7);
@@ -430,10 +315,8 @@
             this.Controls.Add(this.label9);
             this.Controls.Add(this.ID);
             this.Controls.Add(this.update);
-            this.Controls.Add(this.RefreshButton);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.backBtn);
-            this.Controls.Add(this.cari);
             this.Controls.Add(this.textBoxID);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -442,9 +325,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "updatelatihan";
             this.Load += new System.EventHandler(this.updatelatihan_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.gYMDataSet2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.riwayatlatihanBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.latihanBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -452,16 +332,9 @@
         }
 
         #endregion
-        private GYMDataSet2TableAdapters.Riwayat_latihanTableAdapter riwayat_latihanTableAdapter;
-        private GYMDataSet2 gYMDataSet2;
-        private System.Windows.Forms.BindingSource riwayatlatihanBindingSource;
-        private System.Windows.Forms.BindingSource latihanBindingSource;
-        private GYMDataSet2TableAdapters.LatihanTableAdapter latihanTableAdapter;
         private System.Windows.Forms.Button update;
-        private System.Windows.Forms.Button RefreshButton;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button backBtn;
-        private System.Windows.Forms.Button cari;
         private System.Windows.Forms.TextBox textBoxID;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
@@ -469,7 +342,6 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox id_member;
         private System.Windows.Forms.DateTimePicker tanggal;
-        private System.Windows.Forms.TextBox durasi;
         private System.Windows.Forms.TextBox gerakan;
         private System.Windows.Forms.TextBox latihan;
         private System.Windows.Forms.Label label7;
@@ -479,12 +351,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox ID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn idlatihanDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn jenislatihanDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn gerakangerakanDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn tgllatihanDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn durasilatihanDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn idmemberDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn idtrainerDataGridViewTextBoxColumn;
+        private System.Windows.Forms.ComboBox durasi;
     }
 }

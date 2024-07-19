@@ -49,5 +49,12 @@ namespace Gym_desktop
             hl.MdiParent=this.MdiParent;
             hl.Show();
         }
+
+        private void laporan_Click(object sender, EventArgs e)
+        {
+            laporanLatihan ll = new laporanLatihan();
+            ll.MdiParent = this.MdiParent;
+            ll.Show();  
+        }
     }
 }

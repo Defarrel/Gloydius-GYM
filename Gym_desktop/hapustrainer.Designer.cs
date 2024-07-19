@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -39,24 +38,15 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.backBtn = new System.Windows.Forms.Button();
-            this.gYMDataSet = new Gym_desktop.GYMDataSet();
-            this.personalTrainerBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.personalTrainerTableAdapter = new Gym_desktop.GYMDataSetTableAdapters.PersonalTrainerTableAdapter();
-            this.personalTrainerBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.idtrainerDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.namatrainerDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nohptrainerDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label3 = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gYMDataSet)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.personalTrainerBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.personalTrainerBindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridView1
             // 
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.AutoGenerateColumns = false;
             this.dataGridView1.BackgroundColor = System.Drawing.Color.DarkSlateGray;
             this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -68,11 +58,6 @@
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.idtrainerDataGridViewTextBoxColumn,
-            this.namatrainerDataGridViewTextBoxColumn,
-            this.nohptrainerDataGridViewTextBoxColumn});
-            this.dataGridView1.DataSource = this.personalTrainerBindingSource1;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -100,6 +85,7 @@
             this.dataGridView1.RowTemplate.DefaultCellStyle.BackColor = System.Drawing.Color.White;
             this.dataGridView1.Size = new System.Drawing.Size(304, 273);
             this.dataGridView1.TabIndex = 27;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // btnHapus
             // 
@@ -157,45 +143,30 @@
             this.backBtn.UseVisualStyleBackColor = false;
             this.backBtn.Click += new System.EventHandler(this.backBtn_Click);
             // 
-            // gYMDataSet
+            // label3
             // 
-            this.gYMDataSet.DataSetName = "GYMDataSet";
-            this.gYMDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("The Bold Font", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.White;
+            this.label3.Location = new System.Drawing.Point(363, 79);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(390, 41);
+            this.label3.TabIndex = 22;
+            this.label3.Text = "Menu Hapus Trainer";
             // 
-            // personalTrainerBindingSource
+            // button1
             // 
-            this.personalTrainerBindingSource.DataMember = "PersonalTrainer";
-            this.personalTrainerBindingSource.DataSource = this.gYMDataSet;
-            // 
-            // personalTrainerTableAdapter
-            // 
-            this.personalTrainerTableAdapter.ClearBeforeFill = true;
-            // 
-            // personalTrainerBindingSource1
-            // 
-            this.personalTrainerBindingSource1.DataMember = "PersonalTrainer";
-            this.personalTrainerBindingSource1.DataSource = this.gYMDataSet;
-            // 
-            // idtrainerDataGridViewTextBoxColumn
-            // 
-            this.idtrainerDataGridViewTextBoxColumn.DataPropertyName = "Id_trainer";
-            this.idtrainerDataGridViewTextBoxColumn.HeaderText = "Id_trainer";
-            this.idtrainerDataGridViewTextBoxColumn.Name = "idtrainerDataGridViewTextBoxColumn";
-            this.idtrainerDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // namatrainerDataGridViewTextBoxColumn
-            // 
-            this.namatrainerDataGridViewTextBoxColumn.DataPropertyName = "Nama_trainer";
-            this.namatrainerDataGridViewTextBoxColumn.HeaderText = "Nama_trainer";
-            this.namatrainerDataGridViewTextBoxColumn.Name = "namatrainerDataGridViewTextBoxColumn";
-            this.namatrainerDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // nohptrainerDataGridViewTextBoxColumn
-            // 
-            this.nohptrainerDataGridViewTextBoxColumn.DataPropertyName = "No_hp_trainer";
-            this.nohptrainerDataGridViewTextBoxColumn.HeaderText = "No_hp_trainer";
-            this.nohptrainerDataGridViewTextBoxColumn.Name = "nohptrainerDataGridViewTextBoxColumn";
-            this.nohptrainerDataGridViewTextBoxColumn.ReadOnly = true;
+            this.button1.BackColor = System.Drawing.Color.Transparent;
+            this.button1.BackgroundImage = global::Gym_desktop.Properties.Resources.arrow_back_regular_240;
+            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Location = new System.Drawing.Point(1049, 12);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(71, 59);
+            this.button1.TabIndex = 25;
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.backBtn_Click);
             // 
             // hapustrainer
             // 
@@ -205,9 +176,11 @@
             this.ClientSize = new System.Drawing.Size(1132, 672);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.btnHapus);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.backBtn);
             this.Controls.Add(this.hapus_text);
             this.Controls.Add(this.label2);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "hapustrainer";
@@ -215,9 +188,6 @@
             this.Text = "hapus_trainer";
             this.Load += new System.EventHandler(this.hapus_trainer_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gYMDataSet)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.personalTrainerBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.personalTrainerBindingSource1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -231,12 +201,7 @@
         private System.Windows.Forms.TextBox hapus_text;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private GYMDataSet gYMDataSet;
-        private System.Windows.Forms.BindingSource personalTrainerBindingSource;
-        private GYMDataSetTableAdapters.PersonalTrainerTableAdapter personalTrainerTableAdapter;
-        private System.Windows.Forms.DataGridViewTextBoxColumn idtrainerDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn namatrainerDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nohptrainerDataGridViewTextBoxColumn;
-        private System.Windows.Forms.BindingSource personalTrainerBindingSource1;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button button1;
     }
 }

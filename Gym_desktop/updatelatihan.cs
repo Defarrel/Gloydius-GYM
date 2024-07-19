@@ -1,58 +1,56 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing; 
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data.SqlClient;
 using System.Windows.Forms;
 
 namespace Gym_desktop
 {
     public partial class updatelatihan : Form
     {
-        DataTable dt;
-        DataRow dr;
+        string strKoneksi = "Data Source = DEFARREL; Initial Catalog = GYM; Integrated Security = True; MultipleActiveResultSets=true";
+
         public updatelatihan()
         {
             InitializeComponent();
+            cbx();
+        }
+
+        public void cbx()
+        {
+            durasi.Items.Add("1 jam");
+            durasi.Items.Add("2 jam");
+            durasi.Items.Add("3 jam");
+            durasi.Items.Add("4 jam");
+            durasi.Items.Add("5 jam");
+            durasi.Items.Add("6 jam");
+            durasi.Items.Add("7 jam");
+            durasi.Items.Add("8 jam");
         }
 
         private void updatelatihan_Load(object sender, EventArgs e)
         {
-            // TODO: This line of code loads data into the 'gYMDataSet2.Latihan' table. You can move, or remove it, as needed.
-            this.latihanTableAdapter.Fill(this.gYMDataSet2.Latihan);
-            // TODO: This line of code loads data into the 'gYMDataSet2.Riwayat_latihan' table. You can move, or remove it, as needed.
-            this.riwayat_latihanTableAdapter.Fill(this.gYMDataSet2.Riwayat_latihan);
-
+            LoadData();
         }
 
-        private void cari_Click(object sender, EventArgs e)
+        private void LoadData()
         {
-            string searchID = textBoxID.Text.Trim();
-            if (string.IsNullOrEmpty(searchID))
+            DataTable dataTable = new DataTable();
+
+            using (SqlConnection connection = new SqlConnection(strKoneksi))
             {
-                MessageBox.Show("Silakan masukkan ID untuk mencari.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+                connection.Open();
+                string query = "SELECT * FROM Riwayat_latihan";
+                SqlCommand cmd = new SqlCommand(query, connection);
+                cmd.CommandType = CommandType.Text;
+                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                adapter.Fill(dataTable);
             }
 
-            DataView dv = new DataView(gYMDataSet2.Tables["Latihan"]);
-            dv.RowFilter = string.Format("Convert(Id_latihan, 'System.String') like '{0}%'", searchID);
-            dataGridView1.DataSource = dv;
+            dataGridView1.DataSource = dataTable;
 
-            if (dv.Count == 0)
-            {
-                MessageBox.Show("ID tidak ditemukan.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
+            id_member.Enabled = false;
         }
 
-        private void RefreshButton_Click(object sender, EventArgs e)
-        {
-            textBoxID.Text = string.Empty;
-            DataView dv = new DataView(gYMDataSet2.Tables["Latihan"]);
-            dataGridView1.DataSource = dv;
-        }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -62,19 +60,12 @@ namespace Gym_desktop
                 ID.Text = row.Cells[0].Value.ToString();
                 latihan.Text = row.Cells[1].Value.ToString();
                 gerakan.Text = row.Cells[2].Value.ToString();
-                if (row.Cells[3].Value != null && DateTime.TryParse(row.Cells[3].Value.ToString(), out DateTime tanggalValue))  
+                if (row.Cells[3].Value != null && DateTime.TryParse(row.Cells[3].Value.ToString(), out DateTime tanggalValue))
                 {
                     tanggal.Value = tanggalValue;
                 }
                 durasi.Text = row.Cells[4].Value.ToString();
-                if (row.Cells[5].Value != null && int.TryParse(row.Cells[5].Value.ToString(), out int memberValue))
-                {
-                    id_member.Text = memberValue.ToString();
-                }
-                else
-                {
-                    id_member.Text = "0";
-                }
+                id_member.Text = row.Cells[5].Value.ToString();
                 id_trainer.Text = row.Cells[6].Value.ToString();
             }
         }
@@ -99,36 +90,60 @@ namespace Gym_desktop
 
             if (!int.TryParse(id_member.Text, out int memberValue))
             {
-                MessageBox.Show("Id Member dan Id trainer harus berupa angka!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Id Member harus berupa angka!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            dt = gYMDataSet2.Tables["Latihan"];
-            dr = dt.Rows.Find(ID.Text);
+            using (SqlConnection connection = new SqlConnection(strKoneksi))
+            {
+                string query = "UPDATE Latihan SET Jenis_latihan = @latihan, Gerakan_gerakan = @gerakan, Tgl_latihan = @tanggal, Durasi_latihan = @durasi, Id_member = @id_member, Id_trainer = @id_trainer WHERE Id_latihan = @id";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@id", ID.Text);
+                    command.Parameters.AddWithValue("@latihan", latihan.Text);
+                    command.Parameters.AddWithValue("@gerakan", gerakan.Text);
+                    command.Parameters.AddWithValue("@tanggal", tanggal.Value);
+                    command.Parameters.AddWithValue("@durasi", durasi.Text);
+                    command.Parameters.AddWithValue("@id_member", memberValue);
+                    command.Parameters.AddWithValue("@id_trainer", id_trainer.Text);
 
-            dr.BeginEdit();
-            dr["Id_latihan"] = ID.Text;
-            dr["Jenis_latihan"] = latihan.Text;
-            dr["Gerakan_gerakan"] = gerakan.Text;
-            dr["Tgl_latihan"] = tanggal.Value;
-            dr["Durasi_latihan"] = durasi.Text;
-            dr["Id_member"] = memberValue;
-            dr["Id_trainer"] = id_trainer.Text;
-            dr.EndEdit();
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                }
+            }
 
-            latihanTableAdapter.Update(gYMDataSet2);
+            MessageBox.Show("Data berhasil diupdate!", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            LoadData();
 
-            this.latihanTableAdapter.Fill(this.gYMDataSet2.Latihan);
+        }
 
-            ID.Enabled = false;
-            latihan.Enabled = false;
-            gerakan.Enabled = false;
-            tanggal.Enabled = false;
-            durasi.Enabled = false;
-            id_member.Enabled = false;
-            id_trainer.Enabled = false;
+        private void textBoxID_TextChanged(object sender, EventArgs e)
+        {
+            string searchNamaMember = textBoxID.Text.Trim();
+            if (string.IsNullOrEmpty(searchNamaMember))
+            {
+                LoadData();
+            }
 
-            MessageBox.Show("Data berhasil disimpan!", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            using (SqlConnection connection = new SqlConnection(strKoneksi))
+            {
+                DataTable searchResults = new DataTable();
+                string query = "EXEC GetLatihanIdByMemberName @Nama_member";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@Nama_member", searchNamaMember);
+                    SqlDataAdapter adapter = new SqlDataAdapter(command);
+                    connection.Open();
+                    adapter.Fill(searchResults);
+                }
+
+                dataGridView1.DataSource = searchResults;
+
+                if (searchResults.Rows.Count == 0)
+                {
+                    MessageBox.Show("Nama member tidak ditemukan.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
         }
     }
 }

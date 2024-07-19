@@ -34,6 +34,7 @@
             this.btnTambah = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.backBtn = new System.Windows.Forms.Button();
+            this.laporan = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnLihat
@@ -105,12 +106,24 @@
             this.backBtn.UseVisualStyleBackColor = false;
             this.backBtn.Click += new System.EventHandler(this.backBtn_Click);
             // 
+            // laporan
+            // 
+            this.laporan.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold);
+            this.laporan.Location = new System.Drawing.Point(489, 477);
+            this.laporan.Name = "laporan";
+            this.laporan.Size = new System.Drawing.Size(150, 77);
+            this.laporan.TabIndex = 41;
+            this.laporan.Text = "Laporan Latihan";
+            this.laporan.UseVisualStyleBackColor = true;
+            this.laporan.Click += new System.EventHandler(this.laporan_Click);
+            // 
             // latihanManagement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkSlateGray;
             this.ClientSize = new System.Drawing.Size(1132, 672);
+            this.Controls.Add(this.laporan);
             this.Controls.Add(this.backBtn);
             this.Controls.Add(this.btnLihat);
             this.Controls.Add(this.btnUpdate);
@@ -134,5 +147,6 @@
         private System.Windows.Forms.Button btnHapus;
         private System.Windows.Forms.Button btnTambah;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button laporan;
     }
 }

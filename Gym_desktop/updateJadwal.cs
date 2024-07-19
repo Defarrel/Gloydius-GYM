@@ -1,20 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data.SqlClient;
 using System.Windows.Forms;
 
 namespace Gym_desktop
 {
     public partial class updateJadwal : Form
     {
+        string strKoneksi = "Data Source = DEFARREL; Initial Catalog = GYM; Integrated Security = True; MultipleActiveResultSets=true";
 
-        DataTable dt;
-        DataRow dr;
         public updateJadwal()
         {
             InitializeComponent();
@@ -22,35 +16,24 @@ namespace Gym_desktop
 
         private void updateJadwal_Load(object sender, EventArgs e)
         {
-            // TODO: This line of code loads data into the 'gYMDataSet.Jadwal' table. You can move, or remove it, as needed.
-            this.jadwalTableAdapter.Fill(this.gYMDataSet.Jadwal);
-
+            LoadData();
         }
 
-        private void cari_Click(object sender, EventArgs e)
+        private void LoadData()
         {
-            string searchID = textBoxID.Text.Trim();
-            if (string.IsNullOrEmpty(searchID))
+            DataTable dataTable = new DataTable();
+
+            using (SqlConnection connection = new SqlConnection(strKoneksi))
             {
-                MessageBox.Show("Silakan masukkan nama jadwal untuk mencari.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+                connection.Open();
+                string query = "SELECT * FROM Jadwal";
+                SqlCommand cmd = new SqlCommand(query, connection);
+                cmd.CommandType = CommandType.Text;
+                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                adapter.Fill(dataTable);
             }
 
-            DataView dv = new DataView(gYMDataSet.Tables["Jadwal"]);
-            dv.RowFilter = string.Format("Convert(Nama_jadwal, 'System.String') like '{0}%'", searchID);
-            dataGridView1.DataSource = dv;
-
-            if (dv.Count == 0)
-            {
-                MessageBox.Show("Tidak ada jadwal yang ditemukan dengan nama tersebut.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-        }
-
-        private void RefreshButton_Click(object sender, EventArgs e)
-        {
-            textBoxID.Text = string.Empty;
-            DataView dv = new DataView(gYMDataSet.Tables["Jadwal"]);
-            dataGridView1.DataSource = dv;
+            dataGridView1.DataSource = dataTable;
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -79,30 +62,51 @@ namespace Gym_desktop
                 return;
             }
 
-
-            dt = gYMDataSet.Tables["Jadwal"];
-            dr = dt.Rows.Find(id_jadwal.Text);
-
-            dr.BeginEdit();
-            dr["Id_jadwal"] = id_jadwal.Text;
-            dr["Nama_jadwal"] = nama_jadwal.Text;
-            dr["Hari_latihan"] = hari_latihan.Text;
-            dr.EndEdit();
-
-            try
+            using (SqlConnection connection = new SqlConnection(strKoneksi))
             {
-                jadwalTableAdapter.Update(gYMDataSet);
-                this.jadwalTableAdapter.Fill(this.gYMDataSet.Jadwal);
+                string query = "UPDATE Jadwal SET Nama_jadwal = @nama_jadwal, Hari_latihan = @hari_latihan WHERE Id_jadwal = @id_jadwal";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@id_jadwal", id_jadwal.Text);
+                    command.Parameters.AddWithValue("@nama_jadwal", nama_jadwal.Text);
+                    command.Parameters.AddWithValue("@hari_latihan", hari_latihan.Text);
 
-                MessageBox.Show("Data berhasil diupdate!", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                id_jadwal.Enabled = false;
-                nama_jadwal.Enabled = false;
-                hari_latihan.Enabled = false;
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                }
             }
-            catch (Exception ex)
+
+            MessageBox.Show("Data berhasil diupdate!", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            LoadData();
+
+        }
+
+        private void textBoxID_TextChanged(object sender, EventArgs e)
+        {
+            string searchID = textBoxID.Text.Trim();
+            if (string.IsNullOrEmpty(searchID))
             {
-                MessageBox.Show("Terjadi kesalahan saat menyimpan data: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                LoadData();
+            }
+
+            using (SqlConnection connection = new SqlConnection(strKoneksi))
+            {
+                DataTable searchResults = new DataTable();
+                string query = "SELECT * FROM Jadwal WHERE Nama_jadwal LIKE @searchID";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@searchID", searchID + "%");
+                    SqlDataAdapter adapter = new SqlDataAdapter(command);
+                    connection.Open();
+                    adapter.Fill(searchResults);
+                }
+
+                dataGridView1.DataSource = searchResults;
+
+                if (searchResults.Rows.Count == 0)
+                {
+                    MessageBox.Show("Tidak ada jadwal yang ditemukan dengan nama tersebut.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
         }
     }

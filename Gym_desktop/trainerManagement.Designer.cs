@@ -34,6 +34,7 @@
             this.btnTambah = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.backBtn = new System.Windows.Forms.Button();
+            this.bntImport = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnLihat
@@ -105,12 +106,24 @@
             this.backBtn.UseVisualStyleBackColor = false;
             this.backBtn.Click += new System.EventHandler(this.backBtn_Click);
             // 
+            // bntImport
+            // 
+            this.bntImport.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold);
+            this.bntImport.Location = new System.Drawing.Point(502, 467);
+            this.bntImport.Name = "bntImport";
+            this.bntImport.Size = new System.Drawing.Size(150, 77);
+            this.bntImport.TabIndex = 29;
+            this.bntImport.Text = "Import Data";
+            this.bntImport.UseVisualStyleBackColor = true;
+            this.bntImport.Click += new System.EventHandler(this.bntImport_Click);
+            // 
             // trainerManagement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkSlateGray;
             this.ClientSize = new System.Drawing.Size(1132, 672);
+            this.Controls.Add(this.bntImport);
             this.Controls.Add(this.backBtn);
             this.Controls.Add(this.btnLihat);
             this.Controls.Add(this.btnUpdate);
@@ -134,5 +147,6 @@
         private System.Windows.Forms.Button btnHapus;
         private System.Windows.Forms.Button btnTambah;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button bntImport;
     }
 }

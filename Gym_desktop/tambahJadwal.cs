@@ -1,21 +1,13 @@
-﻿using Gym_desktop.GYMDataSetTableAdapters;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
+using System.Data.SqlClient;
 using System.Windows.Forms;
 
 namespace Gym_desktop
 {
     public partial class tambahJadwal : Form
     {
-        DataTable dt;
-        DataRow dr;
-        String code;
+        string strKoneksi = "Data Source=DEFARREL;Initial Catalog=GYM;Integrated Security=True;MultipleActiveResultSets=true";
+        string code;
 
         public tambahJadwal()
         {
@@ -32,30 +24,26 @@ namespace Gym_desktop
                 return;
             }
 
-
-            dt = gYMDataSet.Tables["Jadwal"];
-
-            dr = dt.NewRow();
-            dr["Id_jadwal"] = id_jadwal.Text;
-            dr["Nama_jadwal"] = nama_jadwal.Text;
-            dr["Hari_latihan"] = hari_latihan.Text;
-            dt.Rows.Add(dr);
-
-            try
+            using (SqlConnection connection = new SqlConnection(strKoneksi))
             {
-                jadwalTableAdapter.Update(gYMDataSet);
-                this.jadwalTableAdapter.Fill(this.gYMDataSet.Jadwal);
+                string query = "INSERT INTO Jadwal (Id_jadwal, Nama_jadwal, Hari_latihan) VALUES (@id_jadwal, @nama_jadwal, @hari_latihan)";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@id_jadwal", id_jadwal.Text);
+                    command.Parameters.AddWithValue("@nama_jadwal", nama_jadwal.Text);
+                    command.Parameters.AddWithValue("@hari_latihan", hari_latihan.Text);
 
-                MessageBox.Show("Data berhasil disimpan!", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                }
+            }
 
-                id_jadwal.Enabled = false;
-                nama_jadwal.Enabled = false;
-                hari_latihan.Enabled = false;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Terjadi kesalahan saat menyimpan data: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            MessageBox.Show("Data berhasil disimpan!", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            id_jadwal.Enabled = false;
+            nama_jadwal.Enabled = false;
+            hari_latihan.Enabled = false;
+            GenerateNewId();
         }
 
         private void backBtn_Click(object sender, EventArgs e)
@@ -65,39 +53,44 @@ namespace Gym_desktop
 
         private void tambahJadwal_Load(object sender, EventArgs e)
         {
-            // TODO: This line of code loads data into the 'gYMDataSet.Jadwal' table. You can move, or remove it, as needed.
-            this.jadwalTableAdapter.Fill(this.gYMDataSet.Jadwal);
+            GenerateNewId();
+        }
 
-            int ctr, len;
-            string codeval;
-
-            dt = gYMDataSet.Tables["Jadwal"];
-            len = dt.Rows.Count - 1;
-            dr = dt.Rows[len];
-            code = dr["Id_jadwal"].ToString();
-            codeval = code.Substring(2, 3);
-            ctr = Convert.ToInt32(codeval);
-
-            if ((ctr >= 1) && (ctr < 9))
+        private void GenerateNewId()
+        {
+            using (SqlConnection connection = new SqlConnection(strKoneksi))
             {
-                ctr = ctr + 1;
-                id_jadwal.Text = "JD00" + ctr;
-            }
+                string query = "SELECT TOP 1 Id_jadwal FROM Jadwal ORDER BY Id_jadwal DESC";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    connection.Open();
+                    SqlDataReader reader = command.ExecuteReader();
+                    if (reader.Read())
+                    {
+                        string lastId = reader["Id_jadwal"].ToString();
+                        int ctr = int.Parse(lastId.Substring(2, 3)) + 1;
 
-            else if ((ctr >= 9) && (ctr <= 99))
-            {
-                ctr = ctr + 1;
-                id_jadwal.Text = "JD0" + ctr;
-            }
-
-            else if (ctr > 999)
-            {
-                ctr = ctr + 1;
-                id_jadwal.Text = "Mhs" + ctr;
+                        if (ctr <= 9)
+                        {
+                            id_jadwal.Text = "JD00" + ctr;
+                        }
+                        else if (ctr <= 99)
+                        {
+                            id_jadwal.Text = "JD0" + ctr;
+                        }
+                        else
+                        {
+                            id_jadwal.Text = "JD" + ctr;
+                        }
+                    }
+                    else
+                    {
+                        id_jadwal.Text = "JD001";
+                    }
+                }
             }
 
             id_jadwal.Enabled = false;
-
         }
     }
 }

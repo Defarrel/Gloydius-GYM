@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Gym_desktop
@@ -26,7 +19,7 @@ namespace Gym_desktop
 
         private void TambahPaketMember_Click(object sender, EventArgs e)
         {
-            tambahTransaksi Tt = new tambahTransaksi();
+            transaksiBaru Tt = new transaksiBaru();
             Tt.MdiParent = this.MdiParent;
             Tt.Show();
         }

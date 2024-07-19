@@ -28,32 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.gYMDataSet = new Gym_desktop.GYMDataSet();
             this.backBtn = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.paketMemberBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.paketMemberTableAdapter = new Gym_desktop.GYMDataSetTableAdapters.PaketMemberTableAdapter();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.jadwalBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.jadwalTableAdapter = new Gym_desktop.GYMDataSetTableAdapters.JadwalTableAdapter();
-            this.idjadwalDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.namajadwalDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.harilatihanDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            ((System.ComponentModel.ISupportInitialize)(this.gYMDataSet)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.paketMemberBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.jadwalBindingSource)).BeginInit();
             this.SuspendLayout();
-            // 
-            // gYMDataSet
-            // 
-            this.gYMDataSet.DataSetName = "GYMDataSet";
-            this.gYMDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // backBtn
             // 
@@ -80,20 +63,10 @@
             this.label1.TabIndex = 23;
             this.label1.Text = "Menu Lihat Jadwal";
             // 
-            // paketMemberBindingSource
-            // 
-            this.paketMemberBindingSource.DataMember = "PaketMember";
-            this.paketMemberBindingSource.DataSource = this.gYMDataSet;
-            // 
-            // paketMemberTableAdapter
-            // 
-            this.paketMemberTableAdapter.ClearBeforeFill = true;
-            // 
             // dataGridView1
             // 
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.AutoGenerateColumns = false;
             this.dataGridView1.BackgroundColor = System.Drawing.Color.DarkSlateGray;
             this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -105,11 +78,6 @@
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.idjadwalDataGridViewTextBoxColumn,
-            this.namajadwalDataGridViewTextBoxColumn,
-            this.harilatihanDataGridViewTextBoxColumn});
-            this.dataGridView1.DataSource = this.jadwalBindingSource;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -138,36 +106,6 @@
             this.dataGridView1.Size = new System.Drawing.Size(307, 296);
             this.dataGridView1.TabIndex = 25;
             // 
-            // jadwalBindingSource
-            // 
-            this.jadwalBindingSource.DataMember = "Jadwal";
-            this.jadwalBindingSource.DataSource = this.gYMDataSet;
-            // 
-            // jadwalTableAdapter
-            // 
-            this.jadwalTableAdapter.ClearBeforeFill = true;
-            // 
-            // idjadwalDataGridViewTextBoxColumn
-            // 
-            this.idjadwalDataGridViewTextBoxColumn.DataPropertyName = "Id_jadwal";
-            this.idjadwalDataGridViewTextBoxColumn.HeaderText = "ID";
-            this.idjadwalDataGridViewTextBoxColumn.Name = "idjadwalDataGridViewTextBoxColumn";
-            this.idjadwalDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // namajadwalDataGridViewTextBoxColumn
-            // 
-            this.namajadwalDataGridViewTextBoxColumn.DataPropertyName = "Nama_jadwal";
-            this.namajadwalDataGridViewTextBoxColumn.HeaderText = "Nama Jadwal";
-            this.namajadwalDataGridViewTextBoxColumn.Name = "namajadwalDataGridViewTextBoxColumn";
-            this.namajadwalDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // harilatihanDataGridViewTextBoxColumn
-            // 
-            this.harilatihanDataGridViewTextBoxColumn.DataPropertyName = "Hari_latihan";
-            this.harilatihanDataGridViewTextBoxColumn.HeaderText = "Hari Latihan";
-            this.harilatihanDataGridViewTextBoxColumn.Name = "harilatihanDataGridViewTextBoxColumn";
-            this.harilatihanDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
             // lihatJadwal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -183,10 +121,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "lihat_jadwal";
             this.Load += new System.EventHandler(this.lihatJadwal_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.gYMDataSet)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.paketMemberBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.jadwalBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -195,14 +130,6 @@
         #endregion
         private System.Windows.Forms.Button backBtn;
         private System.Windows.Forms.Label label1;
-        private GYMDataSet gYMDataSet;
-        private System.Windows.Forms.BindingSource paketMemberBindingSource;
-        private GYMDataSetTableAdapters.PaketMemberTableAdapter paketMemberTableAdapter;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.BindingSource jadwalBindingSource;
-        private GYMDataSetTableAdapters.JadwalTableAdapter jadwalTableAdapter;
-        private System.Windows.Forms.DataGridViewTextBoxColumn idjadwalDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn namajadwalDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn harilatihanDataGridViewTextBoxColumn;
     }
 }

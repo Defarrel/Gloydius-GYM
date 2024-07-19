@@ -28,89 +28,67 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.btnHapus = new System.Windows.Forms.Button();
             this.backBtn = new System.Windows.Forms.Button();
             this.hapus_text = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.gYMDataSet2 = new Gym_desktop.GYMDataSet2();
-            this.latihanBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.latihanTableAdapter = new Gym_desktop.GYMDataSet2TableAdapters.LatihanTableAdapter();
-            this.idlatihanDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.jenislatihanDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.gerakangerakanDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tgllatihanDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.durasilatihanDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.idmemberDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.idtrainerDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gYMDataSet2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.latihanBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridView1
             // 
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.AutoGenerateColumns = false;
             this.dataGridView1.BackgroundColor = System.Drawing.Color.DarkSlateGray;
             this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.DarkCyan;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.DarkCyan;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.idlatihanDataGridViewTextBoxColumn,
-            this.jenislatihanDataGridViewTextBoxColumn,
-            this.gerakangerakanDataGridViewTextBoxColumn,
-            this.tgllatihanDataGridViewTextBoxColumn,
-            this.durasilatihanDataGridViewTextBoxColumn,
-            this.idmemberDataGridViewTextBoxColumn,
-            this.idtrainerDataGridViewTextBoxColumn});
-            this.dataGridView1.DataSource = this.latihanBindingSource;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView1.GridColor = System.Drawing.Color.DarkCyan;
             this.dataGridView1.Location = new System.Drawing.Point(208, 134);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Comic Sans MS", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Comic Sans MS", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dataGridView1.RowTemplate.DefaultCellStyle.BackColor = System.Drawing.Color.White;
             this.dataGridView1.Size = new System.Drawing.Size(705, 273);
             this.dataGridView1.TabIndex = 27;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // btnHapus
             // 
             this.btnHapus.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold);
-            this.btnHapus.Location = new System.Drawing.Point(841, 473);
+            this.btnHapus.Location = new System.Drawing.Point(845, 473);
             this.btnHapus.Name = "btnHapus";
             this.btnHapus.Size = new System.Drawing.Size(126, 62);
             this.btnHapus.TabIndex = 26;
@@ -163,69 +141,6 @@
             this.label1.TabIndex = 22;
             this.label1.Text = "Menu Hapus Latihan";
             // 
-            // gYMDataSet2
-            // 
-            this.gYMDataSet2.DataSetName = "GYMDataSet2";
-            this.gYMDataSet2.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // latihanBindingSource
-            // 
-            this.latihanBindingSource.DataMember = "Latihan";
-            this.latihanBindingSource.DataSource = this.gYMDataSet2;
-            // 
-            // latihanTableAdapter
-            // 
-            this.latihanTableAdapter.ClearBeforeFill = true;
-            // 
-            // idlatihanDataGridViewTextBoxColumn
-            // 
-            this.idlatihanDataGridViewTextBoxColumn.DataPropertyName = "Id_latihan";
-            this.idlatihanDataGridViewTextBoxColumn.HeaderText = "Id_latihan";
-            this.idlatihanDataGridViewTextBoxColumn.Name = "idlatihanDataGridViewTextBoxColumn";
-            this.idlatihanDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // jenislatihanDataGridViewTextBoxColumn
-            // 
-            this.jenislatihanDataGridViewTextBoxColumn.DataPropertyName = "Jenis_latihan";
-            this.jenislatihanDataGridViewTextBoxColumn.HeaderText = "Jenis_latihan";
-            this.jenislatihanDataGridViewTextBoxColumn.Name = "jenislatihanDataGridViewTextBoxColumn";
-            this.jenislatihanDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // gerakangerakanDataGridViewTextBoxColumn
-            // 
-            this.gerakangerakanDataGridViewTextBoxColumn.DataPropertyName = "Gerakan_gerakan";
-            this.gerakangerakanDataGridViewTextBoxColumn.HeaderText = "Gerakan_gerakan";
-            this.gerakangerakanDataGridViewTextBoxColumn.Name = "gerakangerakanDataGridViewTextBoxColumn";
-            this.gerakangerakanDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // tgllatihanDataGridViewTextBoxColumn
-            // 
-            this.tgllatihanDataGridViewTextBoxColumn.DataPropertyName = "Tgl_latihan";
-            this.tgllatihanDataGridViewTextBoxColumn.HeaderText = "Tgl_latihan";
-            this.tgllatihanDataGridViewTextBoxColumn.Name = "tgllatihanDataGridViewTextBoxColumn";
-            this.tgllatihanDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // durasilatihanDataGridViewTextBoxColumn
-            // 
-            this.durasilatihanDataGridViewTextBoxColumn.DataPropertyName = "Durasi_latihan";
-            this.durasilatihanDataGridViewTextBoxColumn.HeaderText = "Durasi_latihan";
-            this.durasilatihanDataGridViewTextBoxColumn.Name = "durasilatihanDataGridViewTextBoxColumn";
-            this.durasilatihanDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // idmemberDataGridViewTextBoxColumn
-            // 
-            this.idmemberDataGridViewTextBoxColumn.DataPropertyName = "Id_member";
-            this.idmemberDataGridViewTextBoxColumn.HeaderText = "Id_member";
-            this.idmemberDataGridViewTextBoxColumn.Name = "idmemberDataGridViewTextBoxColumn";
-            this.idmemberDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // idtrainerDataGridViewTextBoxColumn
-            // 
-            this.idtrainerDataGridViewTextBoxColumn.DataPropertyName = "Id_trainer";
-            this.idtrainerDataGridViewTextBoxColumn.HeaderText = "Id_trainer";
-            this.idtrainerDataGridViewTextBoxColumn.Name = "idtrainerDataGridViewTextBoxColumn";
-            this.idtrainerDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
             // hapusLatihan
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -244,8 +159,6 @@
             this.Text = "hapusLatihan";
             this.Load += new System.EventHandler(this.hapusLatihan_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gYMDataSet2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.latihanBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -259,15 +172,5 @@
         private System.Windows.Forms.TextBox hapus_text;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private GYMDataSet2 gYMDataSet2;
-        private System.Windows.Forms.BindingSource latihanBindingSource;
-        private GYMDataSet2TableAdapters.LatihanTableAdapter latihanTableAdapter;
-        private System.Windows.Forms.DataGridViewTextBoxColumn idlatihanDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn jenislatihanDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn gerakangerakanDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn tgllatihanDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn durasilatihanDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn idmemberDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn idtrainerDataGridViewTextBoxColumn;
     }
 }

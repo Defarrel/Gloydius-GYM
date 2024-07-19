@@ -34,6 +34,7 @@
             this.TambahPaketMember = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.backBtn = new System.Windows.Forms.Button();
+            this.diagram = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // btnLihatPaket
@@ -105,12 +106,24 @@
             this.backBtn.UseVisualStyleBackColor = false;
             this.backBtn.Click += new System.EventHandler(this.backBtn_Click);
             // 
+            // diagram
+            // 
+            this.diagram.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold);
+            this.diagram.Location = new System.Drawing.Point(493, 485);
+            this.diagram.Name = "diagram";
+            this.diagram.Size = new System.Drawing.Size(150, 77);
+            this.diagram.TabIndex = 23;
+            this.diagram.Text = "Diagram Pembelian Paket";
+            this.diagram.UseVisualStyleBackColor = true;
+            this.diagram.Click += new System.EventHandler(this.diagram_Click);
+            // 
             // paketManagement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkSlateGray;
             this.ClientSize = new System.Drawing.Size(1132, 672);
+            this.Controls.Add(this.diagram);
             this.Controls.Add(this.backBtn);
             this.Controls.Add(this.btnLihatPaket);
             this.Controls.Add(this.btnUpdate);
@@ -134,5 +147,6 @@
         private System.Windows.Forms.Button TambahPaketMember;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button backBtn;
+        private System.Windows.Forms.Button diagram;
     }
 }

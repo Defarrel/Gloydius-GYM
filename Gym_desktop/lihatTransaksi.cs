@@ -1,10 +1,14 @@
 ﻿using System;
+using System.Data.SqlClient;
+using System.Data;
 using System.Windows.Forms;
 
 namespace Gym_desktop
 {
     public partial class lihatTransaksi : Form
     {
+        string strKoneksi = "Data Source = DEFARREL; Initial Catalog = GYM;" +
+"Integrated Security = True; MultipleActiveResultSets=true";
         public lihatTransaksi()
         {
             InitializeComponent();
@@ -12,8 +16,18 @@ namespace Gym_desktop
 
         private void lihatTransaksi_Load(object sender, EventArgs e)
         {
-            // TODO: This line of code loads data into the 'gYMDataSet.Transaksi' table. You can move, or remove it, as needed.
-            this.transaksiTableAdapter.Fill(this.gYMDataSet.Transaksi);
+            DataTable dataTable = new DataTable();
+
+            SqlConnection connection = new SqlConnection(strKoneksi);
+            connection.Open();
+            string query = "SELECT * FROM Transaksi";
+            SqlCommand cmd = new SqlCommand(query, connection);
+            cmd.CommandType = CommandType.Text;
+            SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+            adapter.Fill(dataTable);
+
+
+            dataGridView1.DataSource = dataTable;
 
         }
 

@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.label1 = new System.Windows.Forms.Label();
             this.btnTambah = new System.Windows.Forms.Button();
             this.durasi = new System.Windows.Forms.TextBox();
@@ -40,11 +39,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.id_paket = new System.Windows.Forms.TextBox();
             this.backBtn = new System.Windows.Forms.Button();
-            this.gYMDataSet1 = new Gym_desktop.GYMDataSet1();
-            this.paketMemberBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.paketMemberTableAdapter = new Gym_desktop.GYMDataSet1TableAdapters.PaketMemberTableAdapter();
-            ((System.ComponentModel.ISupportInitialize)(this.gYMDataSet1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.paketMemberBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -163,20 +157,6 @@
             this.backBtn.UseVisualStyleBackColor = false;
             this.backBtn.Click += new System.EventHandler(this.backBtn_Click);
             // 
-            // gYMDataSet1
-            // 
-            this.gYMDataSet1.DataSetName = "GYMDataSet1";
-            this.gYMDataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // paketMemberBindingSource
-            // 
-            this.paketMemberBindingSource.DataMember = "PaketMember";
-            this.paketMemberBindingSource.DataSource = this.gYMDataSet1;
-            // 
-            // paketMemberTableAdapter
-            // 
-            this.paketMemberTableAdapter.ClearBeforeFill = true;
-            // 
             // tambahPaketMember
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -194,14 +174,11 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.id_paket);
             this.Controls.Add(this.label1);
-            this.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.paketMemberBindingSource, "Id_paket", true));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "tambahPaketMember";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "tambahPaketMember";
             this.Load += new System.EventHandler(this.tambahPaketMember_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.gYMDataSet1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.paketMemberBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -220,8 +197,5 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox id_paket;
         private System.Windows.Forms.Button backBtn;
-        private GYMDataSet1 gYMDataSet1;
-        private System.Windows.Forms.BindingSource paketMemberBindingSource;
-        private GYMDataSet1TableAdapters.PaketMemberTableAdapter paketMemberTableAdapter;
     }
 }

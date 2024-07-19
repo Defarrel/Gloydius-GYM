@@ -28,23 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.personalTrainerBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.gYMDataSet = new Gym_desktop.GYMDataSet();
-            this.personalTrainerTableAdapter = new Gym_desktop.GYMDataSetTableAdapters.PersonalTrainerTableAdapter();
             this.update = new System.Windows.Forms.Button();
-            this.RefreshButton = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.idtrainerDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.namatrainerDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.nohptrainerDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.personalTrainerBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.backBtn = new System.Windows.Forms.Button();
-            this.cari = new System.Windows.Forms.Button();
             this.textBoxID = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -54,30 +44,13 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.id_trainer = new System.Windows.Forms.TextBox();
-            ((System.ComponentModel.ISupportInitialize)(this.personalTrainerBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gYMDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.personalTrainerBindingSource1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // personalTrainerBindingSource
-            // 
-            this.personalTrainerBindingSource.DataMember = "PersonalTrainer";
-            this.personalTrainerBindingSource.DataSource = this.gYMDataSet;
-            // 
-            // gYMDataSet
-            // 
-            this.gYMDataSet.DataSetName = "GYMDataSet";
-            this.gYMDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // personalTrainerTableAdapter
-            // 
-            this.personalTrainerTableAdapter.ClearBeforeFill = true;
             // 
             // update
             // 
             this.update.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold);
-            this.update.Location = new System.Drawing.Point(781, 551);
+            this.update.Location = new System.Drawing.Point(1008, 549);
             this.update.Name = "update";
             this.update.Size = new System.Drawing.Size(96, 46);
             this.update.TabIndex = 61;
@@ -85,23 +58,11 @@
             this.update.UseVisualStyleBackColor = true;
             this.update.Click += new System.EventHandler(this.update_Click);
             // 
-            // RefreshButton
-            // 
-            this.RefreshButton.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold);
-            this.RefreshButton.Location = new System.Drawing.Point(1008, 551);
-            this.RefreshButton.Name = "RefreshButton";
-            this.RefreshButton.Size = new System.Drawing.Size(96, 46);
-            this.RefreshButton.TabIndex = 45;
-            this.RefreshButton.Text = "Refresh";
-            this.RefreshButton.UseVisualStyleBackColor = true;
-            this.RefreshButton.Click += new System.EventHandler(this.RefreshButton_Click);
-            // 
             // dataGridView1
             // 
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
             this.dataGridView1.AllowUserToOrderColumns = true;
-            this.dataGridView1.AutoGenerateColumns = false;
             this.dataGridView1.BackgroundColor = System.Drawing.Color.DarkSlateGray;
             this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
@@ -113,11 +74,6 @@
             dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle9;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.idtrainerDataGridViewTextBoxColumn,
-            this.namatrainerDataGridViewTextBoxColumn,
-            this.nohptrainerDataGridViewTextBoxColumn});
-            this.dataGridView1.DataSource = this.personalTrainerBindingSource1;
             dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle10.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -146,29 +102,6 @@
             this.dataGridView1.TabIndex = 44;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
-            // idtrainerDataGridViewTextBoxColumn
-            // 
-            this.idtrainerDataGridViewTextBoxColumn.DataPropertyName = "Id_trainer";
-            this.idtrainerDataGridViewTextBoxColumn.HeaderText = "Id_trainer";
-            this.idtrainerDataGridViewTextBoxColumn.Name = "idtrainerDataGridViewTextBoxColumn";
-            // 
-            // namatrainerDataGridViewTextBoxColumn
-            // 
-            this.namatrainerDataGridViewTextBoxColumn.DataPropertyName = "Nama_trainer";
-            this.namatrainerDataGridViewTextBoxColumn.HeaderText = "Nama_trainer";
-            this.namatrainerDataGridViewTextBoxColumn.Name = "namatrainerDataGridViewTextBoxColumn";
-            // 
-            // nohptrainerDataGridViewTextBoxColumn
-            // 
-            this.nohptrainerDataGridViewTextBoxColumn.DataPropertyName = "No_hp_trainer";
-            this.nohptrainerDataGridViewTextBoxColumn.HeaderText = "No_hp_trainer";
-            this.nohptrainerDataGridViewTextBoxColumn.Name = "nohptrainerDataGridViewTextBoxColumn";
-            // 
-            // personalTrainerBindingSource1
-            // 
-            this.personalTrainerBindingSource1.DataMember = "PersonalTrainer";
-            this.personalTrainerBindingSource1.DataSource = this.gYMDataSet;
-            // 
             // backBtn
             // 
             this.backBtn.BackColor = System.Drawing.Color.Transparent;
@@ -183,17 +116,6 @@
             this.backBtn.UseVisualStyleBackColor = false;
             this.backBtn.Click += new System.EventHandler(this.backBtn_Click);
             // 
-            // cari
-            // 
-            this.cari.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold);
-            this.cari.Location = new System.Drawing.Point(896, 551);
-            this.cari.Name = "cari";
-            this.cari.Size = new System.Drawing.Size(96, 46);
-            this.cari.TabIndex = 42;
-            this.cari.Text = "Cari";
-            this.cari.UseVisualStyleBackColor = true;
-            this.cari.Click += new System.EventHandler(this.cari_Click);
-            // 
             // textBoxID
             // 
             this.textBoxID.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
@@ -202,6 +124,7 @@
             this.textBoxID.Name = "textBoxID";
             this.textBoxID.Size = new System.Drawing.Size(305, 35);
             this.textBoxID.TabIndex = 41;
+            this.textBoxID.TextChanged += new System.EventHandler(this.textBoxID_TextChanged);
             // 
             // label2
             // 
@@ -298,10 +221,8 @@
             this.Controls.Add(this.label5);
             this.Controls.Add(this.id_trainer);
             this.Controls.Add(this.update);
-            this.Controls.Add(this.RefreshButton);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.backBtn);
-            this.Controls.Add(this.cari);
             this.Controls.Add(this.textBoxID);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -310,24 +231,16 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "updateTrainer";
             this.Load += new System.EventHandler(this.updateTrainer_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.personalTrainerBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gYMDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.personalTrainerBindingSource1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-        private GYMDataSet gYMDataSet;
-        private System.Windows.Forms.BindingSource personalTrainerBindingSource;
-        private GYMDataSetTableAdapters.PersonalTrainerTableAdapter personalTrainerTableAdapter;
         private System.Windows.Forms.Button update;
-        private System.Windows.Forms.Button RefreshButton;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button backBtn;
-        private System.Windows.Forms.Button cari;
         private System.Windows.Forms.TextBox textBoxID;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
@@ -337,9 +250,5 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox id_trainer;
-        private System.Windows.Forms.DataGridViewTextBoxColumn idtrainerDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn namatrainerDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn nohptrainerDataGridViewTextBoxColumn;
-        private System.Windows.Forms.BindingSource personalTrainerBindingSource1;
     }
 }

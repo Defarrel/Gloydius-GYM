@@ -21,5 +21,10 @@ namespace Gym_desktop
         {
             this.Close();
         }
+
+        private void transaksi_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

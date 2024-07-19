@@ -1,17 +1,14 @@
 ﻿using System;
 using System.Data;
-using System.Drawing;
+using System.Data.SqlClient;
 using System.Windows.Forms;
 
 namespace Gym_desktop
 {
     public partial class updateTransaksi : Form
     {
+        string strKoneksi = "Data Source = DEFARREL; Initial Catalog = GYM; Integrated Security = True; MultipleActiveResultSets=true";
 
-        DataTable dt;
-        DataRow dr;
-        Image curImage;
-        string curFIleName;
         public updateTransaksi()
         {
             InitializeComponent();
@@ -19,30 +16,38 @@ namespace Gym_desktop
 
         private void updateTransaksi_Load(object sender, EventArgs e)
         {
-            // This line of code loads data into the 'gYMDataSet.Transaksi' table. You can move, or remove it, as needed.
-            this.transaksiTableAdapter.Fill(this.gYMDataSet.Transaksi);
-
+            LoadData();
             ID.Enabled = false;
             idMember.Enabled = false;
         }
 
-
-        private void cari_Click(object sender, EventArgs e)
+        private void LoadData()
         {
-            string searchID = textBoxID.Text.Trim();
-            if (string.IsNullOrEmpty(searchID))
+            DataTable dataTable = new DataTable();
+
+            using (SqlConnection connection = new SqlConnection(strKoneksi))
             {
-                MessageBox.Show("Silakan masukkan ID untuk mencari.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+                connection.Open();
+                string query = "SELECT * FROM Transaksi_v";
+                SqlCommand cmd = new SqlCommand(query, connection);
+                cmd.CommandType = CommandType.Text;
+                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                adapter.Fill(dataTable);
             }
 
-            DataView dv = new DataView(gYMDataSet.Tables["Transaksi"]);
-            dv.RowFilter = string.Format("Convert(Id_transaksi, 'System.String') like '{0}%'", searchID);
-            dataGridView1.DataSource = dv;
+            dataGridView1.DataSource = dataTable;
+        }
 
-            if (dv.Count == 0)
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
             {
-                MessageBox.Show("ID tidak ditemukan.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
+                ID.Text = row.Cells[0].Value.ToString();
+                tanggal.Value = Convert.ToDateTime(row.Cells[1].Value);
+                total.Text = row.Cells[2].Value.ToString();
+                idMember.Text = row.Cells[3].Value.ToString();
+                idPaket.Text = row.Cells[4].Value.ToString();
             }
         }
 
@@ -51,53 +56,13 @@ namespace Gym_desktop
             this.Close();
         }
 
-        private void RefreshButton_Click(object sender, EventArgs e)
-        {
-            textBoxID.Text = string.Empty;
-            DataView dv = new DataView(gYMDataSet.Tables["Transaksi"]);
-            dataGridView1.DataSource = dv;
-        }
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex >= 0)
-            {
-                DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
-                if (row.Cells[0].Value != null && int.TryParse(row.Cells[0].Value.ToString(), out int idValue))
-                {
-                    ID.Text = idValue.ToString();
-                }
-
-                if (row.Cells[1].Value != null && DateTime.TryParse(row.Cells[1].Value.ToString(), out DateTime tanggalvalue))  
-                {
-                    tanggal.Value = tanggalvalue;
-                }
-                if (row.Cells[2].Value != null && decimal.TryParse(row.Cells[2].Value.ToString(), out decimal totalValue))
-                {
-                    total.Text = totalValue.ToString();
-                }
-                else
-                {
-                    total.Text = "0";
-                }
-                if (row.Cells[3].Value != null && int.TryParse(row.Cells[3].Value.ToString(), out int memberValue))
-                {
-                    idMember.Text = memberValue.ToString();
-                }
-                else
-                {
-                    idMember.Text = "0";
-                }
-                idPaket.Text = row.Cells[4].Value.ToString();
-            }
-        }
-
         private void update_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(tanggal.Text) ||
-              string.IsNullOrWhiteSpace(total.Text) ||
-              string.IsNullOrWhiteSpace(idMember.Text) ||
-              string.IsNullOrWhiteSpace(idPaket.Text))
+            if (string.IsNullOrWhiteSpace(ID.Text) ||
+                string.IsNullOrWhiteSpace(tanggal.Text) ||
+                string.IsNullOrWhiteSpace(total.Text) ||
+                string.IsNullOrWhiteSpace(idMember.Text) ||
+                string.IsNullOrWhiteSpace(idPaket.Text))
             {
                 MessageBox.Show("Semua field harus diisi!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -113,24 +78,54 @@ namespace Gym_desktop
                 MessageBox.Show("ID Member harus berupa angka!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            dt = gYMDataSet.Tables["Transaksi"];
-            dr = dt.Rows.Find(ID.Text);
 
-            dr.BeginEdit();
-            dr["Tanggal_transaksi"] = tanggal.Value;
-            dr["Total"] = totalValue;
-            dr["Id_member"] = idMemberValue;
-            dr["Id_paket"] = idPaket.Text;
-            dr.EndEdit();
+            using (SqlConnection connection = new SqlConnection(strKoneksi))
+            {
+                string query = "UPDATE Transaksi SET Tanggal_transaksi = @tanggal, Total = @total, Id_member = @idMember, Id_paket = @idPaket WHERE Id_transaksi = @id";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@id", ID.Text);
+                    command.Parameters.AddWithValue("@tanggal", tanggal.Value);
+                    command.Parameters.AddWithValue("@total", totalValue);
+                    command.Parameters.AddWithValue("@idMember", idMemberValue);
+                    command.Parameters.AddWithValue("@idPaket", idPaket.Text);
 
-            transaksiTableAdapter.Update(gYMDataSet);
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                }
+            }
 
-            this.transaksiTableAdapter.Fill(this.gYMDataSet.Transaksi);
+            MessageBox.Show("Data berhasil diupdate!", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            LoadData();
+        }
 
-            tanggal.Enabled = false;
-            total.Enabled = false;
-            idMember.Enabled = false;
-            idPaket.Enabled = false;
+        private void textBoxID_TextChanged(object sender, EventArgs e)
+        {
+            string namaMember = textBoxID.Text.Trim();
+            if (string.IsNullOrEmpty(namaMember))
+            {
+                LoadData();
+            }
+
+            using (SqlConnection connection = new SqlConnection(strKoneksi))
+            {
+                DataTable searchResults = new DataTable();
+                string query = "EXEC GetTransaksiIdByMemberName @Nama_member";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@Nama_member", namaMember);
+                    SqlDataAdapter adapter = new SqlDataAdapter(command);
+                    connection.Open();
+                    adapter.Fill(searchResults);
+                }
+
+                dataGridView1.DataSource = searchResults;
+
+                if (searchResults.Rows.Count == 0)
+                {
+                    MessageBox.Show("Tidak ada data transaksi untuk member tersebut.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
         }
     }
 }

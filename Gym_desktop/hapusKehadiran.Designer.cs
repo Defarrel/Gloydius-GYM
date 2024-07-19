@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
@@ -38,25 +37,14 @@
             this.hapus_text = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.gYMDataSet2 = new Gym_desktop.GYMDataSet2();
-            this.kehadiranTrainerBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.kehadiranTrainerTableAdapter = new Gym_desktop.GYMDataSet2TableAdapters.KehadiranTrainerTableAdapter();
-            this.idkehadiranDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.kehadiranDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tanggalkehadiranDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.idtrainerDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.idjadwalDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.backBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gYMDataSet2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.kehadiranTrainerBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridView1
             // 
             this.dataGridView1.AllowUserToAddRows = false;
             this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.AutoGenerateColumns = false;
             this.dataGridView1.BackgroundColor = System.Drawing.Color.DarkSlateGray;
             this.dataGridView1.BorderStyle = System.Windows.Forms.BorderStyle.None;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
@@ -68,13 +56,6 @@
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.idkehadiranDataGridViewTextBoxColumn,
-            this.kehadiranDataGridViewTextBoxColumn,
-            this.tanggalkehadiranDataGridViewTextBoxColumn,
-            this.idtrainerDataGridViewTextBoxColumn,
-            this.idjadwalDataGridViewTextBoxColumn});
-            this.dataGridView1.DataSource = this.kehadiranTrainerBindingSource;
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -102,6 +83,7 @@
             this.dataGridView1.RowTemplate.DefaultCellStyle.BackColor = System.Drawing.Color.White;
             this.dataGridView1.Size = new System.Drawing.Size(505, 273);
             this.dataGridView1.TabIndex = 33;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // btnHapus
             // 
@@ -145,55 +127,6 @@
             this.label1.TabIndex = 28;
             this.label1.Text = "Menu Hapus Kehadiran";
             // 
-            // gYMDataSet2
-            // 
-            this.gYMDataSet2.DataSetName = "GYMDataSet2";
-            this.gYMDataSet2.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // kehadiranTrainerBindingSource
-            // 
-            this.kehadiranTrainerBindingSource.DataMember = "KehadiranTrainer";
-            this.kehadiranTrainerBindingSource.DataSource = this.gYMDataSet2;
-            // 
-            // kehadiranTrainerTableAdapter
-            // 
-            this.kehadiranTrainerTableAdapter.ClearBeforeFill = true;
-            // 
-            // idkehadiranDataGridViewTextBoxColumn
-            // 
-            this.idkehadiranDataGridViewTextBoxColumn.DataPropertyName = "Id_kehadiran";
-            this.idkehadiranDataGridViewTextBoxColumn.HeaderText = "Id_kehadiran";
-            this.idkehadiranDataGridViewTextBoxColumn.Name = "idkehadiranDataGridViewTextBoxColumn";
-            this.idkehadiranDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // kehadiranDataGridViewTextBoxColumn
-            // 
-            this.kehadiranDataGridViewTextBoxColumn.DataPropertyName = "Kehadiran";
-            this.kehadiranDataGridViewTextBoxColumn.HeaderText = "Kehadiran";
-            this.kehadiranDataGridViewTextBoxColumn.Name = "kehadiranDataGridViewTextBoxColumn";
-            this.kehadiranDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // tanggalkehadiranDataGridViewTextBoxColumn
-            // 
-            this.tanggalkehadiranDataGridViewTextBoxColumn.DataPropertyName = "Tanggal_kehadiran";
-            this.tanggalkehadiranDataGridViewTextBoxColumn.HeaderText = "Tanggal_kehadiran";
-            this.tanggalkehadiranDataGridViewTextBoxColumn.Name = "tanggalkehadiranDataGridViewTextBoxColumn";
-            this.tanggalkehadiranDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // idtrainerDataGridViewTextBoxColumn
-            // 
-            this.idtrainerDataGridViewTextBoxColumn.DataPropertyName = "Id_trainer";
-            this.idtrainerDataGridViewTextBoxColumn.HeaderText = "Id_trainer";
-            this.idtrainerDataGridViewTextBoxColumn.Name = "idtrainerDataGridViewTextBoxColumn";
-            this.idtrainerDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // idjadwalDataGridViewTextBoxColumn
-            // 
-            this.idjadwalDataGridViewTextBoxColumn.DataPropertyName = "Id_jadwal";
-            this.idjadwalDataGridViewTextBoxColumn.HeaderText = "Id_jadwal";
-            this.idjadwalDataGridViewTextBoxColumn.Name = "idjadwalDataGridViewTextBoxColumn";
-            this.idjadwalDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
             // backBtn
             // 
             this.backBtn.BackColor = System.Drawing.Color.Transparent;
@@ -226,8 +159,6 @@
             this.Text = "hapusKehadiran";
             this.Load += new System.EventHandler(this.hapusKehadiran_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gYMDataSet2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.kehadiranTrainerBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -241,13 +172,5 @@
         private System.Windows.Forms.TextBox hapus_text;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private GYMDataSet2 gYMDataSet2;
-        private System.Windows.Forms.BindingSource kehadiranTrainerBindingSource;
-        private GYMDataSet2TableAdapters.KehadiranTrainerTableAdapter kehadiranTrainerTableAdapter;
-        private System.Windows.Forms.DataGridViewTextBoxColumn idkehadiranDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn kehadiranDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn tanggalkehadiranDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn idtrainerDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn idjadwalDataGridViewTextBoxColumn;
     }
 }

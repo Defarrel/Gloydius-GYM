@@ -19,7 +19,7 @@ namespace Gym_desktop
 
         private void btnTambah_Click(object sender, EventArgs e)
         {
-            tambahTrainer Tt = new tambahTrainer();
+            tambahTransaksi Tt = new tambahTransaksi();
             Tt.MdiParent = this.MdiParent;
             Tt.Show();
         }
@@ -48,6 +48,13 @@ namespace Gym_desktop
         private void backBtn_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void bntImport_Click(object sender, EventArgs e)
+        {
+            importData id = new importData();
+            id.MdiParent = this.MdiParent;
+            id.Show();
         }
     }
 }

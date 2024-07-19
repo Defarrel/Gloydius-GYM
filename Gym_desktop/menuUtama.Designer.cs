@@ -37,7 +37,17 @@
             this.btnPaket = new System.Windows.Forms.Button();
             this.btnTransaksi = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.kehadiran = new System.Windows.Forms.Button();
+            this.latihan = new System.Windows.Forms.Button();
+            this.transaksi = new System.Windows.Forms.Button();
+            this.paket = new System.Windows.Forms.Button();
+            this.trainer = new System.Windows.Forms.Button();
+            this.jadwal = new System.Windows.Forms.Button();
+            this.member = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -169,12 +179,117 @@
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("The Bold Font", 26.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.label1.Location = new System.Drawing.Point(298, 44);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(540, 39);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Welcome Back Admin Tercinta";
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.DarkSlateGray;
+            this.panel2.Controls.Add(this.kehadiran);
+            this.panel2.Controls.Add(this.latihan);
+            this.panel2.Controls.Add(this.transaksi);
+            this.panel2.Controls.Add(this.paket);
+            this.panel2.Controls.Add(this.trainer);
+            this.panel2.Controls.Add(this.jadwal);
+            this.panel2.Controls.Add(this.member);
+            this.panel2.Controls.Add(this.label1);
+            this.panel2.Location = new System.Drawing.Point(129, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(1142, 681);
+            this.panel2.TabIndex = 3;
+            // 
+            // kehadiran
+            // 
+            this.kehadiran.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.kehadiran.Location = new System.Drawing.Point(496, 516);
+            this.kehadiran.Name = "kehadiran";
+            this.kehadiran.Size = new System.Drawing.Size(150, 77);
+            this.kehadiran.TabIndex = 29;
+            this.kehadiran.Text = "Kehadiran Trainer Management";
+            this.kehadiran.UseVisualStyleBackColor = true;
+            this.kehadiran.Click += new System.EventHandler(this.kehadiran_Click);
+            // 
+            // latihan
+            // 
+            this.latihan.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.latihan.Location = new System.Drawing.Point(812, 333);
+            this.latihan.Name = "latihan";
+            this.latihan.Size = new System.Drawing.Size(150, 77);
+            this.latihan.TabIndex = 28;
+            this.latihan.Text = "Latihan Management";
+            this.latihan.UseVisualStyleBackColor = true;
+            this.latihan.Click += new System.EventHandler(this.latihan_Click);
+            // 
+            // transaksi
+            // 
+            this.transaksi.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.transaksi.Location = new System.Drawing.Point(812, 153);
+            this.transaksi.Name = "transaksi";
+            this.transaksi.Size = new System.Drawing.Size(150, 77);
+            this.transaksi.TabIndex = 27;
+            this.transaksi.Text = "Transaksi Management";
+            this.transaksi.UseVisualStyleBackColor = true;
+            this.transaksi.Click += new System.EventHandler(this.transaksi_Click);
+            // 
+            // paket
+            // 
+            this.paket.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.paket.Location = new System.Drawing.Point(496, 153);
+            this.paket.Name = "paket";
+            this.paket.Size = new System.Drawing.Size(150, 77);
+            this.paket.TabIndex = 26;
+            this.paket.Text = "Paket Member Management";
+            this.paket.UseVisualStyleBackColor = true;
+            this.paket.Click += new System.EventHandler(this.paket_Click);
+            // 
+            // trainer
+            // 
+            this.trainer.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.trainer.Location = new System.Drawing.Point(166, 333);
+            this.trainer.Name = "trainer";
+            this.trainer.Size = new System.Drawing.Size(150, 77);
+            this.trainer.TabIndex = 25;
+            this.trainer.Text = "Trainer Management";
+            this.trainer.UseVisualStyleBackColor = true;
+            this.trainer.Click += new System.EventHandler(this.trainer_Click);
+            // 
+            // jadwal
+            // 
+            this.jadwal.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.jadwal.Location = new System.Drawing.Point(496, 333);
+            this.jadwal.Name = "jadwal";
+            this.jadwal.Size = new System.Drawing.Size(150, 77);
+            this.jadwal.TabIndex = 24;
+            this.jadwal.Text = "Jadwal Management";
+            this.jadwal.UseVisualStyleBackColor = true;
+            this.jadwal.Click += new System.EventHandler(this.jadwal_Click);
+            // 
+            // member
+            // 
+            this.member.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.member.Location = new System.Drawing.Point(166, 153);
+            this.member.Name = "member";
+            this.member.Size = new System.Drawing.Size(150, 77);
+            this.member.TabIndex = 23;
+            this.member.Text = "Member Management";
+            this.member.UseVisualStyleBackColor = true;
+            this.member.Click += new System.EventHandler(this.member_Click);
+            // 
             // Menu_utama
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkCyan;
             this.ClientSize = new System.Drawing.Size(1264, 681);
+            this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.IsMdiContainer = true;
             this.Name = "Menu_utama";
@@ -183,6 +298,8 @@
             this.Load += new System.EventHandler(this.Menu_utama_Load);
             this.Click += new System.EventHandler(this.button1_Click);
             this.panel1.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -198,5 +315,14 @@
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Button kehadiran;
+        private System.Windows.Forms.Button latihan;
+        private System.Windows.Forms.Button transaksi;
+        private System.Windows.Forms.Button paket;
+        private System.Windows.Forms.Button trainer;
+        private System.Windows.Forms.Button jadwal;
+        private System.Windows.Forms.Button member;
     }
 }

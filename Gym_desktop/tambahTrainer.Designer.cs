@@ -28,12 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.btnTambah = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.gYMDataSet = new Gym_desktop.GYMDataSet();
-            this.personalTrainerBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.personalTrainerTableAdapter = new Gym_desktop.GYMDataSetTableAdapters.PersonalTrainerTableAdapter();
             this.backBtn = new System.Windows.Forms.Button();
             this.id_trainer = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -41,8 +37,6 @@
             this.label4 = new System.Windows.Forms.Label();
             this.nama_trainer = new System.Windows.Forms.TextBox();
             this.no_hp = new System.Windows.Forms.TextBox();
-            ((System.ComponentModel.ISupportInitialize)(this.gYMDataSet)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.personalTrainerBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // btnTambah
@@ -66,20 +60,6 @@
             this.label1.Size = new System.Drawing.Size(413, 41);
             this.label1.TabIndex = 29;
             this.label1.Text = "Menu Tambah Trainer";
-            // 
-            // gYMDataSet
-            // 
-            this.gYMDataSet.DataSetName = "GYMDataSet";
-            this.gYMDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // personalTrainerBindingSource
-            // 
-            this.personalTrainerBindingSource.DataMember = "PersonalTrainer";
-            this.personalTrainerBindingSource.DataSource = this.gYMDataSet;
-            // 
-            // personalTrainerTableAdapter
-            // 
-            this.personalTrainerTableAdapter.ClearBeforeFill = true;
             // 
             // backBtn
             // 
@@ -175,8 +155,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "tambahTrainer";
             this.Load += new System.EventHandler(this.tambahTrainer_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.gYMDataSet)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.personalTrainerBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -187,9 +165,6 @@
         private System.Windows.Forms.Button backBtn;
         private System.Windows.Forms.Button btnTambah;
         private System.Windows.Forms.Label label1;
-        private GYMDataSet gYMDataSet;
-        private System.Windows.Forms.BindingSource personalTrainerBindingSource;
-        private GYMDataSetTableAdapters.PersonalTrainerTableAdapter personalTrainerTableAdapter;
         private System.Windows.Forms.TextBox id_trainer;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;

@@ -1,21 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data.SqlClient;
 using System.Windows.Forms;
 
 namespace Gym_desktop
 {
     public partial class updatePaket : Form
     {
+        string strKoneksi = "Data Source = DEFARREL; Initial Catalog = GYM; Integrated Security = True; MultipleActiveResultSets=true";
 
-        DataTable dt;
-        DataRow dr;
         public updatePaket()
         {
             InitializeComponent();
@@ -23,35 +16,24 @@ namespace Gym_desktop
 
         private void updatePaket_Load(object sender, EventArgs e)
         {
-            // TODO: This line of code loads data into the 'gYMDataSet1.PaketMember' table. You can move, or remove it, as needed.
-            this.paketMemberTableAdapter.Fill(this.gYMDataSet1.PaketMember);
-
+            LoadData();
         }
 
-        private void cari_Click(object sender, EventArgs e)
+        private void LoadData()
         {
-            string searchID = textBoxID.Text.Trim();
-            if (string.IsNullOrEmpty(searchID))
+            DataTable dataTable = new DataTable();
+
+            using (SqlConnection connection = new SqlConnection(strKoneksi))
             {
-                MessageBox.Show("Silakan masukkan nama paket untuk mencari.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+                connection.Open();
+                string query = "SELECT * FROM PaketMember";
+                SqlCommand cmd = new SqlCommand(query, connection);
+                cmd.CommandType = CommandType.Text;
+                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                adapter.Fill(dataTable);
             }
 
-            DataView dv = new DataView(gYMDataSet1.Tables["PaketMember"]);
-            dv.RowFilter = string.Format("Convert(Nama_paket, 'System.String') like '{0}%'", searchID);
-            dataGridView1.DataSource = dv;
-
-            if (dv.Count == 0)
-            {
-                MessageBox.Show("Tidak ada paket yang ditemukan dengan nama tersebut.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-        }
-
-        private void RefreshButton_Click(object sender, EventArgs e)
-        {
-            textBoxID.Text = string.Empty;
-            DataView dv = new DataView(gYMDataSet1.Tables["PaketMember"]);
-            dataGridView1.DataSource = dv;
+            dataGridView1.DataSource = dataTable;
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -77,7 +59,6 @@ namespace Gym_desktop
 
         private void update_Click(object sender, EventArgs e)
         {
-
             if (string.IsNullOrWhiteSpace(id_paket.Text) ||
                 string.IsNullOrWhiteSpace(nama_paket.Text) ||
                 string.IsNullOrWhiteSpace(harga_paket.Text) ||
@@ -93,22 +74,52 @@ namespace Gym_desktop
                 return;
             }
 
+            using (SqlConnection connection = new SqlConnection(strKoneksi))
+            {
+                string query = "UPDATE PaketMember SET Nama_paket = @nama_paket, Harga_paket = @harga_paket, Durasi_paket = @durasi_paket WHERE Id_paket = @id_paket";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@id_paket", id_paket.Text);
+                    command.Parameters.AddWithValue("@nama_paket", nama_paket.Text);
+                    command.Parameters.AddWithValue("@harga_paket", hargaValue);
+                    command.Parameters.AddWithValue("@durasi_paket", durasi.Text);
 
-            dt = gYMDataSet1.Tables["PaketMember"];
-            dr = dt.Rows.Find(id_paket.Text);
-
-            dr.BeginEdit();
-
-            dr["Id_paket"] = id_paket.Text;
-            dr["Nama_paket"] = nama_paket.Text;
-            dr["Harga_paket"] = decimal.Parse(harga_paket.Text);
-            dr["Durasi_paket"] = durasi.Text;
-
-            dr.EndEdit();
-
-            paketMemberTableAdapter.Update(gYMDataSet1.PaketMember);
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                }
+            }
 
             MessageBox.Show("Data berhasil diupdate!", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            LoadData();
+        }
+
+        private void textBoxID_TextChanged(object sender, EventArgs e)
+        {
+            string searchID = textBoxID.Text.Trim();
+            if (string.IsNullOrEmpty(searchID))
+            {
+                LoadData();
+            }
+
+            using (SqlConnection connection = new SqlConnection(strKoneksi))
+            {
+                DataTable searchResults = new DataTable();
+                string query = "SELECT * FROM PaketMember WHERE Nama_paket LIKE @searchID";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@searchID", searchID + "%");
+                    SqlDataAdapter adapter = new SqlDataAdapter(command);
+                    connection.Open();
+                    adapter.Fill(searchResults);
+                }
+
+                dataGridView1.DataSource = searchResults;
+
+                if (searchResults.Rows.Count == 0)
+                {
+                    MessageBox.Show("Tidak ada paket yang ditemukan dengan nama tersebut.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
         }
     }
 }

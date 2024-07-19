@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.backBtn = new System.Windows.Forms.Button();
             this.btnTambah = new System.Windows.Forms.Button();
             this.hari_latihan = new System.Windows.Forms.TextBox();
@@ -38,11 +37,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.id_jadwal = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.gYMDataSet = new Gym_desktop.GYMDataSet();
-            this.jadwalBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.jadwalTableAdapter = new Gym_desktop.GYMDataSetTableAdapters.JadwalTableAdapter();
-            ((System.ComponentModel.ISupportInitialize)(this.gYMDataSet)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.jadwalBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // backBtn
@@ -141,20 +135,6 @@
             this.label1.TabIndex = 40;
             this.label1.Text = "Menu Tambah Jadwal";
             // 
-            // gYMDataSet
-            // 
-            this.gYMDataSet.DataSetName = "GYMDataSet";
-            this.gYMDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // jadwalBindingSource
-            // 
-            this.jadwalBindingSource.DataMember = "Jadwal";
-            this.jadwalBindingSource.DataSource = this.gYMDataSet;
-            // 
-            // jadwalTableAdapter
-            // 
-            this.jadwalTableAdapter.ClearBeforeFill = true;
-            // 
             // tambahJadwal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -175,8 +155,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "tambahJadwal";
             this.Load += new System.EventHandler(this.tambahJadwal_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.gYMDataSet)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.jadwalBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -193,8 +171,5 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox id_jadwal;
         private System.Windows.Forms.Label label1;
-        private GYMDataSet gYMDataSet;
-        private System.Windows.Forms.BindingSource jadwalBindingSource;
-        private GYMDataSetTableAdapters.JadwalTableAdapter jadwalTableAdapter;
     }
 }

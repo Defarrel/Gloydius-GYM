@@ -1,14 +1,12 @@
 ﻿using System;
-using System.Data;
+using System.Data.SqlClient;
 using System.Windows.Forms;
 
 namespace Gym_desktop
 {
     public partial class tambahTrainer : Form
     {
-        DataTable dt;
-        DataRow dr;
-        String code;
+        string strKoneksi = "Data Source=DEFARREL;Initial Catalog=GYM;Integrated Security=True;MultipleActiveResultSets=true";
 
         public tambahTrainer()
         {
@@ -31,29 +29,82 @@ namespace Gym_desktop
                 return;
             }
 
-            dt = gYMDataSet.Tables["PersonalTrainer"];
-
-            dr = dt.NewRow();
-            dr["Id_trainer"] = id_trainer.Text;
-            dr["Nama_trainer"] = nama_trainer.Text;
-            dr["No_hp_trainer"] = no_hp.Text;
-            dt.Rows.Add(dr);
-
             try
             {
-                personalTrainerTableAdapter.Update(gYMDataSet);
-                this.personalTrainerTableAdapter.Fill(this.gYMDataSet.PersonalTrainer);
+                using (SqlConnection connection = new SqlConnection(strKoneksi))
+                {
+                    connection.Open();
 
-                MessageBox.Show("Data berhasil disimpan!", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    string query = @"INSERT INTO PersonalTrainer (Id_trainer, Nama_trainer, No_hp_trainer) 
+                                     VALUES (@Id_trainer, @Nama_trainer, @No_hp_trainer)";
 
-                id_trainer.Enabled = false;
-                nama_trainer.Enabled = false;
-                no_hp.Enabled = false;
+                    SqlCommand command = new SqlCommand(query, connection);
+                    command.Parameters.AddWithValue("@Id_trainer", id_trainer.Text);
+                    command.Parameters.AddWithValue("@Nama_trainer", nama_trainer.Text);
+                    command.Parameters.AddWithValue("@No_hp_trainer", no_hp.Text);
+
+                    command.ExecuteNonQuery();
+
+                    MessageBox.Show("Data berhasil disimpan!", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    id_trainer.Enabled = false;
+                    nama_trainer.Enabled = false;
+                    no_hp.Enabled = false;
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Terjadi kesalahan saat menyimpan data: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void tambahTrainer_Load(object sender, EventArgs e)
+        {
+            GenerateNewId();
+        }
+
+        private void GenerateNewId()
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(strKoneksi))
+                {
+                    string query = "SELECT TOP 1 Id_trainer FROM PersonalTrainer ORDER BY Id_trainer DESC";
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        connection.Open();
+                        SqlDataReader reader = command.ExecuteReader();
+                        if (reader.Read())
+                        {
+                            string lastId = reader["Id_trainer"].ToString();
+                            int ctr = int.Parse(lastId.Substring(2, 3)) + 1;
+
+                            if (ctr <= 9)
+                            {
+                                id_trainer.Text = "PT00" + ctr;
+                            }
+                            else if (ctr <= 99)
+                            {
+                                id_trainer.Text = "PT0" + ctr;
+                            }
+                            else
+                            {
+                                id_trainer.Text = "PT" + ctr;
+                            }
+                        }
+                        else
+                        {
+                            id_trainer.Text = "PT001";
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Terjadi kesalahan: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            id_trainer.Enabled = false;
         }
 
         private bool IsNumeric(string text)
@@ -66,42 +117,6 @@ namespace Gym_desktop
                 }
             }
             return true;
-        }
-
-        private void tambahTrainer_Load(object sender, EventArgs e)
-        {
-            // This line of code loads data into the 'gYMDataSet.PersonalTrainer' table. You can move, or remove it, as needed.
-            this.personalTrainerTableAdapter.Fill(this.gYMDataSet.PersonalTrainer);
-
-            int ctr, len;
-            string codeval;
-
-            dt = gYMDataSet.Tables["PersonalTrainer"];
-            len = dt.Rows.Count - 1;
-            dr = dt.Rows[len];
-            code = dr["Id_trainer"].ToString();
-            codeval = code.Substring(2, 3);
-            ctr = Convert.ToInt32(codeval);
-
-            if ((ctr >= 1) && (ctr < 9))
-            {
-                ctr = ctr + 1;
-                id_trainer.Text = "PT00" + ctr;
-            }
-
-            else if ((ctr >= 9) && (ctr <= 99))
-            {
-                ctr = ctr + 1;
-                id_trainer.Text = "PT0" + ctr;
-            }
-
-            else if (ctr > 999)
-            {
-                ctr = ctr + 1;
-                id_trainer.Text = "Mhs" + ctr;
-            }
-
-            id_trainer.Enabled = false;
         }
 
         private void backBtn_Click(object sender, EventArgs e)

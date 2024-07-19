@@ -1,25 +1,30 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data.SqlClient;
 using System.Windows.Forms;
 
 namespace Gym_desktop
 {
     public partial class tambahLatihan : Form
     {
+        string strKoneksi = "Data Source=DEFARREL;Initial Catalog=GYM;Integrated Security=True;MultipleActiveResultSets=true";
 
-        DataTable dt;
-        DataRow dr;
-        String code;
         public tambahLatihan()
         {
             InitializeComponent();
+            cbx();
+        }
+
+        public void cbx()
+        {
+            durasi.Items.Add("1 jam");
+            durasi.Items.Add("2 jam");
+            durasi.Items.Add("3 jam");
+            durasi.Items.Add("4 jam");
+            durasi.Items.Add("5 jam");
+            durasi.Items.Add("6 jam");
+            durasi.Items.Add("7 jam");
+            durasi.Items.Add("8 jam");
         }
 
         private void btnTambah_Click(object sender, EventArgs e)
@@ -37,88 +42,129 @@ namespace Gym_desktop
 
             if (!int.TryParse(id_member.Text, out int memberValue))
             {
-                MessageBox.Show("Id Member dan Id trainer harus berupa angka!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Id Member harus berupa angka!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            dt = gYMDataSet2.Tables["Latihan"];
+            using (SqlConnection connection = new SqlConnection(strKoneksi))
+            {
+                try
+                {
+                    connection.Open();
 
-            dr = dt.NewRow();
-            dr["Id_latihan"] = ID.Text;
-            dr["Jenis_latihan"] = latihan.Text;
-            dr["Gerakan_gerakan"] = gerakan.Text;
-            dr["Tgl_latihan"] = tanggal.Value;
-            dr["Durasi_latihan"] = durasi.Text;
-            dr["Id_member"] = memberValue;
-            dr["Id_trainer"] = id_trainer.Text;
-            dt.Rows.Add(dr);
+                    string query = @"INSERT INTO Latihan (Id_latihan, Jenis_latihan, Gerakan_gerakan, Tgl_latihan, Durasi_latihan, Id_member, Id_trainer) 
+                                     VALUES (@Id_latihan, @Jenis_latihan, @Gerakan_gerakan, @Tgl_latihan, @Durasi_latihan, @Id_member, @Id_trainer)";
 
-            latihanTableAdapter.Update(gYMDataSet2);
+                    SqlCommand command = new SqlCommand(query, connection);
+                    command.Parameters.AddWithValue("@Id_latihan", ID.Text);
+                    command.Parameters.AddWithValue("@Jenis_latihan", latihan.Text);
+                    command.Parameters.AddWithValue("@Gerakan_gerakan", gerakan.Text);
+                    command.Parameters.AddWithValue("@Tgl_latihan", tanggal.Value);
+                    command.Parameters.AddWithValue("@Durasi_latihan", durasi.Text);
+                    command.Parameters.AddWithValue("@Id_member", memberValue);
+                    command.Parameters.AddWithValue("@Id_trainer", id_trainer.Text);
 
-            this.latihanTableAdapter.Fill(this.gYMDataSet2.Latihan);
+                    command.ExecuteNonQuery();
 
-            ID.Enabled = false;
-            latihan.Enabled = false;
-            gerakan.Enabled = false;
-            tanggal.Enabled = false;
-            durasi.Enabled = false;
-            id_member.Enabled = false;
-            id_trainer.Enabled = false;
+                    MessageBox.Show("Data berhasil disimpan!", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-            MessageBox.Show("Data berhasil disimpan!", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    ID.Enabled = false;
+                    latihan.Enabled = false;
+                    gerakan.Enabled = false;
+                    tanggal.Enabled = false;
+                    durasi.Enabled = false;
+                    id_member.Enabled = false;
+                    id_trainer.Enabled = false;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Terjadi kesalahan saat menyimpan data: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
 
         private void tambahLatihan_Load(object sender, EventArgs e)
         {
-            // TODO: This line of code loads data into the 'gYMDataSet2.Latihan' table. You can move, or remove it, as needed.
-            this.latihanTableAdapter.Fill(this.gYMDataSet2.Latihan);
+            GenerateNewId();
 
-            int ctr, len;
-            string codeval;
+            DataTable dataTableTrainer = new DataTable();
+            DataTable dataTableMember = new DataTable();
 
-            dt = gYMDataSet2.Tables["Latihan"];
-            len = dt.Rows.Count - 1;
-            dr = dt.Rows[len];
-            code = dr["Id_latihan"].ToString();
-            codeval = code.Substring(2, 5);
-            ctr = Convert.ToInt32(codeval);
 
-            if ((ctr >= 1) && (ctr < 9))
-            {
-                ctr = ctr + 1;
-                ID.Text = "JD0000" + ctr;
-            }
 
-            else if ((ctr >= 9) && (ctr <= 99))
-            {
-                ctr = ctr + 1;
-                ID.Text = "JD000" + ctr;
-            }
+            SqlConnection connection = new SqlConnection(strKoneksi);
+            connection.Open();
+            string queryTrainer = "SELECT * FROM PersonalTrainer";
+            SqlCommand cmdTrainer = new SqlCommand(queryTrainer, connection);
+            cmdTrainer.CommandType = CommandType.Text;
+            SqlDataAdapter adapterTrainer = new SqlDataAdapter(cmdTrainer);
+            adapterTrainer.Fill(dataTableTrainer);
 
-            else if ((ctr >= 99) && (ctr <= 999))
-            {
-                ctr = ctr + 1;
-                ID.Text = "JD00" + ctr;
-            }
+            string queryJadwal = "SELECT * FROM Member";
+            SqlCommand cmdJadwal = new SqlCommand(queryJadwal, connection);
+            cmdJadwal.CommandType = CommandType.Text;
+            SqlDataAdapter adapterJadwal = new SqlDataAdapter(cmdJadwal);
+            adapterJadwal.Fill(dataTableMember);
 
-            else if ((ctr >= 999) && (ctr <= 9999))
-            {
-                ctr = ctr + 1;
-                ID.Text = "JD0" + ctr;
-            }
-
-            else if (ctr > 99999)
-            {
-                ctr = ctr + 1;
-                ID.Text = "JD" + ctr;
-            }
-
-            ID.Enabled = false;
+            dataGridView1.DataSource = dataTableMember;
+            dataGridView2.DataSource = dataTableTrainer;
         }
 
         private void backBtn_Click(object sender, EventArgs e)
         {
             this.Close();
         }
+
+        private void GenerateNewId()
+        {
+            using (SqlConnection connection = new SqlConnection(strKoneksi))
+            {
+                try
+                {
+                    connection.Open();
+
+                    string query = "SELECT TOP 1 Id_latihan FROM Latihan ORDER BY Id_latihan DESC";
+                    SqlCommand command = new SqlCommand(query, connection);
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    if (reader.Read())
+                    {
+                        string lastId = reader["Id_latihan"].ToString();
+                        int ctr = int.Parse(lastId.Substring(2)) + 1;
+
+                        ID.Text = "JD" + ctr.ToString().PadLeft(5, '0');
+                    }
+                    else
+                    {
+                        ID.Text = "JD00001";
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Terjadi kesalahan saat mengambil ID terakhir: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+
+            ID.Enabled = false;
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
+                id_member.Text = row.Cells["Id_member"].Value.ToString();
+            }
+        }
+
+        private void dataGridView2_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow row = dataGridView2.Rows[e.RowIndex];
+                id_trainer.Text = row.Cells["Id_trainer"].Value.ToString();
+
+            }
+        }
     }
-}
+    }

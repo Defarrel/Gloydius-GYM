@@ -10,10 +10,9 @@ namespace Gym_desktop
 {
     public partial class tambahMember : Form
     {
-        DataTable dt;
-        DataRow dr;
-        Image curImage;
-        string curFIleName;
+
+        string curFileName;
+        string strKoneksi = "Data Source=DEFARREL;Initial Catalog=GYM;Integrated Security=True;MultipleActiveResultSets=true";
         public tambahMember()
         {
             InitializeComponent();
@@ -29,7 +28,8 @@ namespace Gym_desktop
             if (string.IsNullOrWhiteSpace(nama.Text) ||
                 string.IsNullOrWhiteSpace(berat_badan.Text) ||
                 string.IsNullOrWhiteSpace(umur.Text) ||
-                string.IsNullOrWhiteSpace(no_hp.Text))
+                string.IsNullOrWhiteSpace(no_hp.Text) ||
+                string.IsNullOrWhiteSpace(curFileName))
             {
                 MessageBox.Show("Semua field harus diisi!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -46,36 +46,52 @@ namespace Gym_desktop
                 MessageBox.Show("Nomor hp harus terdiri dari 12 digit angka!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            FileStream file = new FileStream(curFIleName, FileMode.OpenOrCreate, FileAccess.Read);
-            byte[] rawdata = new byte[file.Length];
-            file.Read(rawdata, 0, System.Convert.ToInt32(file.Length));
-            file.Close();
 
-            dt = gYMDataSet.Tables["Member"];
+            try
+            {
+                byte[] rawdata;
+                using (FileStream file = new FileStream(curFileName, FileMode.Open, FileAccess.Read))
+                {
+                    rawdata = new byte[file.Length];
+                    file.Read(rawdata, 0, rawdata.Length);
+                }
 
-            dr = dt.NewRow();
-            dr["Nama_member"] = nama.Text;
-            dr["Berat_bdn"] = berat_badan.Text;
-            dr["Umur"] = umurValue;
-            dr["No_hp"] = no_hp.Text;
-            dr["Tgl_daftar"] = daftar.Value;
-            dr["Tgl_tenggat"] = tenggat.Value;
-            dr["Gambar"] = rawdata;
-            dt.Rows.Add(dr);
+                using (SqlConnection connection = new SqlConnection(strKoneksi))
+                {
+                    connection.Open();
 
-            memberTableAdapter.Update(gYMDataSet);
+                    string query = "INSERT INTO Member (Nama_member, Berat_bdn, Umur, No_hp, Tgl_daftar, Tgl_tenggat, Gambar) VALUES (@Nama, @Berat, @Umur, @NoHp, @TglDaftar, @TglTenggat, @Gambar)";
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@Nama", nama.Text);
+                        command.Parameters.AddWithValue("@Berat", berat_badan.Text);
+                        command.Parameters.AddWithValue("@Umur", umurValue);
+                        command.Parameters.AddWithValue("@NoHp", no_hp.Text);
+                        command.Parameters.AddWithValue("@TglDaftar", daftar.Value);
+                        command.Parameters.AddWithValue("@TglTenggat", tenggat.Value);
+                        command.Parameters.AddWithValue("@Gambar", rawdata);
 
-            this.memberTableAdapter.Fill(this.gYMDataSet.Member);
+                        command.ExecuteNonQuery();
+                    }
 
-            nama.Enabled = false;
-            berat_badan.Enabled = false;
-            umur.Enabled = false;
-            no_hp.Enabled = false;
-            daftar.Enabled = false;
-            tenggat.Enabled = false;
+                    connection.Close();
+                }
 
-            MessageBox.Show("Data berhasil disimpan!", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Data berhasil disimpan!", "Sukses", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                nama.Text = string.Empty;
+                berat_badan.Text = string.Empty;
+                umur.Text = string.Empty;
+                no_hp.Text = string.Empty;
+                gambar.Text = string.Empty;
+                curFileName = string.Empty;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Terjadi kesalahan saat menyimpan data: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
+
 
         private bool IsNumeric(string text)
         {
@@ -89,64 +105,7 @@ namespace Gym_desktop
             return true;
         }
 
-
-        private void tambahMember_Load(object sender, EventArgs e)
-        {
-            // TODO: This line of code loads data into the 'gYMDataSet.Member' table. You can move, or remove it, as needed.
-            this.memberTableAdapter.Fill(this.gYMDataSet.Member);
-        }
-
-        private void tgl_daftar_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void no_hp_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void umur_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void berat_badan_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label7_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label6_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label5_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void gambar_TextChanged(object sender, EventArgs e)
         {
 
         }
@@ -156,9 +115,16 @@ namespace Gym_desktop
             OpenFileDialog openDlg = new OpenFileDialog();
             if (openDlg.ShowDialog() == DialogResult.OK)
             {
-                curFIleName = openDlg.FileName;
+                curFileName = openDlg.FileName;
                 gambar.Text = openDlg.FileName;
             }
+        }
+
+        private void lanjut_Click(object sender, EventArgs e)
+        {
+            transaksiBaru tb = new transaksiBaru();
+            tb.MdiParent = this.MdiParent;
+            tb.Show();
         }
     }
 }

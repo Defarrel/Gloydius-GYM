@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,8 @@ namespace Gym_desktop
 {
     public partial class lihatPaket : Form
     {
+        string strKoneksi = "Data Source = DEFARREL; Initial Catalog = GYM;" +
+"Integrated Security = True; MultipleActiveResultSets=true";
         public lihatPaket()
         {
             InitializeComponent();
@@ -19,9 +22,18 @@ namespace Gym_desktop
 
         private void lihatPaket_Load(object sender, EventArgs e)
         {
-            // TODO: This line of code loads data into the 'gYMDataSet1.PaketMember' table. You can move, or remove it, as needed.
-            this.paketMemberTableAdapter.Fill(this.gYMDataSet1.PaketMember);
+            DataTable dataTable = new DataTable();
 
+            SqlConnection connection = new SqlConnection(strKoneksi);
+            connection.Open();
+            string query = "SELECT * FROM PaketMember";
+            SqlCommand cmd = new SqlCommand(query, connection);
+            cmd.CommandType = CommandType.Text;
+            SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+            adapter.Fill(dataTable);
+
+
+            dataGridView1.DataSource = dataTable;
         }
 
         private void backBtn_Click(object sender, EventArgs e)
